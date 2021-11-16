@@ -25,41 +25,41 @@ Subscription count: 0
 """
 import numpy as np
 import cv2
-from common import Module
+from module import Module
 
-import rclpy
-from rclpy.node import Node
+#import rclpy
+#from rclpy.node import Node
 
-from std_msgs.msg import String
-from sensor_msgs.msg import Image
+#from std_msgs.msg import String
+#from sensor_msgs.msg import Image
 
-from cv_bridge import CvBridge
-from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy
+#from cv_bridge import CvBridge
+#from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy
 
-class Colorspace_transform(Module, Node):
+class Colorspace_transform(Module):#, Node):
     transforms = {}
 
     def __init__(self, params):
         Module.__init__(self, params, "colorspace_transform")
-        Node.__init__(self, "colorspace_filter_subscriber")
+        #Node.__init__(self, "colorspace_filter_subscriber")
 
         #print(params["topic"])
 
-        qos = QoSProfile(depth = 10,
-                        durability = QoSDurabilityPolicy.RMW_QOS_POLICY_DURABILITY_VOLATILE,
-                        reliability = QoSReliabilityPolicy.RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT)
-        self.subscription = self.create_subscription(
+        #qos = QoSProfile(depth = 10,
+        #                durability = QoSDurabilityPolicy.RMW_QOS_POLICY_DURABILITY_VOLATILE,
+        #                reliability = QoSReliabilityPolicy.RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT)
+        #self.subscription = self.create_subscription(
             #String,
-            Image,
+        #    Image,
             # "sos",
             #'/rs_camera/rs_d435/image_raw',
-            params["topic"],
-            self.listener,
-            qos)
+        #    params["topic"],
+        #    self.listener,
+        #    qos)
 
         #self.subscription
 
-        self.bridge = CvBridge()
+        #self.bridge = CvBridge()
 
         self.result = np.zeros((3,3,3), np.uint8)
 
@@ -92,13 +92,15 @@ class Colorspace_transform(Module, Node):
 
         return self.result
 
-    def work(self, input):
+    def work(self, inp):
         if self.source_colorspace == self.target_colorspace:
-            self.result = input
+            self.result = inp
 
         else:
-            self.result = cv2.cvtColor(input, self.transforms[self.source_colorspace +
+            self.result = cv2.cvtColor(inp, self.transforms[self.source_colorspace +
                                                             "2" + self.target_colorspace])
+	
+        return self.result
 
     def listener(self, msg):
         #print ("message received")
