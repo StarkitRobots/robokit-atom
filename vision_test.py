@@ -7,12 +7,15 @@ import rospy
 
 import vision
 
-#from cv_bridge import CvBridge
+from cv_bridge import CvBridge
 
 class Pipeline:
     def __init__(self):
         self.bgr2rgb = vision.Colorspace_transform({"from" : "RGB", "to" : "BGR"})
         self.rgb2hsv = vision.Colorspace_transform({"from" : "RGB", "to" : "HSV"})
+
+        self.br = CvBridge()
+        self.hsv_publisher = rospy.Publisher('hsv_image', Image, queue_size=10)
 
     def callback(self, rgb_msg, camera_info):
         #print("sdcsdcsdc")
@@ -27,6 +30,7 @@ class Pipeline:
         #rgb_image = CvBridge().imgmsg_to_cv2(rgb_msg, desired_encoding="rgb8")
     
         cv2.imshow("camera_raw", hsv)
+        self.hsv_publisher.publish(self.br.cv2_to_imgmsg(hsv))
         cv2.waitKey(10)
 
         #camera_info_K = np.array(camera_info.K).reshape([3, 3])
