@@ -16,4 +16,8 @@ To launch test vision script:
 
 ```bash
  roslaunch vision vision_test.launch
+ rosrun motion walk_motion_srver.py
+ rosrun motion walk_motion_srver.py
 ```
+
+
