@@ -163,7 +163,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    src/walk_motion_server.py
-   src/TEST_MOTION/test_client.py
+   src/test_client.py
    #src/TEST_MOTION/test_motion_atom.py
    #src/TEST_MOTION/compute_Alpha_v3.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

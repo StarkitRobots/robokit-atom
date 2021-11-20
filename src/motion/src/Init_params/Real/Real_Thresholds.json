@@ -1,9 +1,0 @@
-{"orange ball": {"th": [18, 95, -10, 85, 15, 103], "pixel": 20, "area": 20},
-     "blue posts": {"th": [0, 22, -17, 43, -45, -16], "pixel": 50, "area": 50}, 
-        "yellow posts": {"th": [72, 99, -50, -28, 3, 55], "pixel": 100, "area": 100}, 
-            "white posts": {"th": [44, 100, -18, 29, -14, 93], "pixel": 50, "area": 50}, 
-                "green field": {"th": [33, 78, -128, -12, -128, 127], "pixel": 10, "area": 10},
-                     "white marking": {"th": [70, 100, -23, 112, -22, 42], "pixel": 10, "area": 10}}
-
-
-                    
