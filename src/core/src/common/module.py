@@ -8,15 +8,19 @@ import math
 
 
 class Module:
-    def __init__(self, params, type_name="module"):
+    def __init__(self, params, type_name="module", show = False):
         self.params = params
         self.type_name = type_name
+        self.show = show
+        self.result = None
 
     def apply(self, input):
         pass
 
-    def draw(self, img):
-        return img
+    def draw(self):
+        if self.show:
+            cv2.imshow(self.type_name, self.result)
+            cv2.waitKey(10)
 
 
 class Source(Module):

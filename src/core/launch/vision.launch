@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+    <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+    <node pkg="core" name="vision_node" type="vision_node.py" output="screen"> 
+    </node>
+</launch>
+
+ 
