@@ -59,6 +59,7 @@ add_service_files(
   ModelService.srv
   MotionService.srv
   WalkService.srv
+  ServoService.srv
 )
 
 ## Generate actions in the 'action' folder
