@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <include file="$(find core)/launch/core.launch"/>
+    
+    <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
+        <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+    </node>
+
+</launch>
+
+ 

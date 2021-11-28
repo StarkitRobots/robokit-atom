@@ -1,9 +1,12 @@
-# UART Control for Kondo Rcb4 controller
-#
-openmv = True
-
+openmv = False
 import time
 import struct
+
+from enum import Enum
+import serial
+from struct import *
+
+
 # try:
 #     from pyb import UART
 # except ImportError:
@@ -12,38 +15,38 @@ import struct
 
 # from micropython import const
 
-class Serial:
-    def __init__(self, uart):
-        self.uart = uart
+# class Serial:
+#     def __init__(self, uart):
+#         self.uart = uart
 
-    def flushInput(self):
-        if openmv:
-            buf = self.uart.any()
-            self.uart.read(buf)
-        else:
-            self.uart.flushInput()
+#     def flushInput(self):
+#         if openmv:
+#             buf = self.uart.any()
+#             self.uart.read(buf)
+#         else:
+#             self.uart.flushInput()
 
-    def read(self, rxLen):
-        if openmv:
-            msg = []
-            for _ in range(rxLen):
-                msg.append(self.uart.readchar())
-            #print("read ",msg)
-            return bytes(bytearray(msg))
-        else:
-            #print("read ",msg)
-            return self.uart.read(rxLen)
+#     def read(self, rxLen):
+#         if openmv:
+#             msg = []
+#             for _ in range(rxLen):
+#                 msg.append(self.uart.readchar())
+#             #print("read ",msg)
+#             return bytes(bytearray(msg))
+#         else:
+#             #print("read ",msg)
+#             return self.uart.read(rxLen)
 
-    def write(self, buf):
-        if openmv:
-            tmp = bytes(bytearray(buf))
-            #print("written ",buf)
-            for b in tmp:
-                self.uart.writechar(b)
-                # time.sleep(1)
-        else:
-            #print("written ",buf)
-            self.uart.write(buf)
+#     def write(self, buf):
+#         if openmv:
+#             tmp = bytes(bytearray(buf))
+#             #print("written ",buf)
+#             for b in tmp:
+#                 self.uart.writechar(b)
+#                 # time.sleep(1)
+#         else:
+#             #print("written ",buf)
+#             self.uart.write(buf)
 
 class Rcb4BaseLib:
     def __init__(self):
@@ -64,31 +67,38 @@ class Rcb4BaseLib:
 
 
 
-    def open(self, uart=''):
-        if self.comOpen == False:
-            self.com = Serial(uart)
-            self.com.flushInput()
-            if self.checkAcknowledge() == True:
-                confData = self.getConfig()
-                if (confData == 0xFFFF):
-                    return False
+    def open(self,comName,bundrate,timOut):
+        if self.com == None:
+            try:
+                self.com = serial.Serial(comName,bundrate,parity='E',stopbits =1,timeout=timOut)
+                self.com.flushInput()#
+                
+                if self.checkAcknowledge() == True:
+                    #ACKが成功した場合Configデータを取得
+                    confData = self.getConfig()
+                    #confDataは0xFFFFの場合はエラー
+                    if(confData == 0xFFFF):
+                        return False
+                    else:
+                        self.__configData = confData
+                        return True
                 else:
-                    self.__configData = confData
-                    self.comOpen = True
-                    return True
-            else:
+                    return False
+                                
+            except:        
                 return False
-
         else:
             return False
 
+    
     def close(self):
         try:
-            self.com.deinit()
-            self.comOpen = False
+            self.com.close()
+            self.com = 0
             return 0
         except:
             return -1
+
 
     @staticmethod
     def CheckSum(dataBytes):
@@ -183,8 +193,8 @@ class Rcb4BaseLib:
     def synchronize(self, txBuf, rxLen, writeOnly=False):
         sendbuf = [256]
         if self.__isSynchronize == False:
-            sendbuf = []
-
+            #sendbuf = []
+            sendbuf.clear()
             if (len(txBuf) == 0 or rxLen <= 3):
                 rxbuf = []
                 return rxbuf
@@ -197,24 +207,26 @@ class Rcb4BaseLib:
 
             self.__isSynchronize = True
 
+            # print('sendData-->',sendbuf)
+
             self.com.flushInput()
             self.com.write(sendbuf)
-            if not writeOnly:
-                rxbuf = self.com.read(rxLen)
-                self.com.flushInput()
-                if rxbuf is not None:
-                    if len(rxbuf) == rxLen and rxbuf[0] == rxLen:
-                        if self.__checkCheckSum(rxbuf) == False:
-                            rxbuf = []
-                    else:
-                        rxbuf = []
-                else:
+            #if not writeOnly:
+            rxbuf = self.com.read(rxLen)
+            self.com.flushInput()
+            if rxbuf is not None:
+                #if len(rxbuf) == rxLen and rxbuf[0] == rxLen:
+                if self.__checkCheckSum(rxbuf) == False:
                     rxbuf = []
+                #else:
+                #rxbuf = []
             else:
-                self.com.flushInput()
                 rxbuf = []
+            #else:
+             #   self.com.flushInput()
+              #  rxbuf = []
             self.__isSynchronize = False
-
+            # print('readData-->',rxbuf)
             return rxbuf
         else:
             rxbuf = []
@@ -839,11 +851,8 @@ class Rcb4BaseLib:
 
 if __name__ == "__main__":
     kondo = Rcb4BaseLib()
-    if openmv:
-        uart = UART(1, 115200, timeout=1000, parity=0)
-        kondo.open(uart)
-    else:
-        kondo.open()
+    kondo.open('/dev/ttyS5',1250000, 1.3) #1250000
+    #print(kondo.com)
     #kondo.com.read(buf)
     #buf = kondo.com.write()
     #kondo.motionPlay(51)

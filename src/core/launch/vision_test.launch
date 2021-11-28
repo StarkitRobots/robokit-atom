@@ -2,9 +2,14 @@
 
 <launch>
     <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
-    <node pkg="vision" name="vision_test" type="vision_test.py" output="screen"> </node>
-    <node pkg="vision" name="hsv_reader" type="hsv_reader.py" output="screen"> </node>
-    
+  
+    <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
+        <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+    </node>
+
+    <!-- <node pkg="core" name="basket" type="vision_node.py" output="screen"> 
+        <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+    </node> -->
 </launch>
 
  

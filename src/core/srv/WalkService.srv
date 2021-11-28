@@ -1,6 +1,6 @@
-int64 cycle_num
+bool walk_enabled
 int64 step_length
 int64 side_length
 float32 angle
 ---
-bool success
+bool walk_enabled

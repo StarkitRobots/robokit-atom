@@ -20,9 +20,8 @@ def handle_self_from_image(req):
 
 if __name__ == "__main__":
     rospy.init_node("model_service_server")
-    print(model)
     
     robot_model = RobotModel()
     model_server = rospy.Service("model_service", ModelService, handle_self_from_image)
-    print("Launched ModelService")
+    rospy.loginfo(f"Launched \033[92mmodel_service\033[0m")
     rospy.spin()

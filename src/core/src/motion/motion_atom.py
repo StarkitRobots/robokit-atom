@@ -8,6 +8,9 @@ from serial import Serial as UART
 from .compute_Alpha_v3 import Alpha
 from .kondo_controller import Rcb4BaseLib
 
+
+comp = "Atom"
+
 class Motion:
     def __init__(self):
         self.ACTIVESERVOS = [(10,2),(9,2),(8,2),(7,2),(6,2),(5,2),(4,2),
@@ -86,9 +89,15 @@ class Motion:
             'Leg_left_7','Leg_left_6','Leg_left_5','hand_left_4','hand_left_3','hand_left_2','hand_left_1','head0','head12']
         
         
-        uart = UART("/dev/tty0", 1250000, timeout = 1000, parity = serial.PARITY_ODD)
+        #uart = UART("/dev/tty0", 1250000, timeout = 1000, parity = serial.PARITY_ODD)
+
         self.kondo = Rcb4BaseLib()
-        self.kondo.open(uart)
+
+        # self.kondo.open('/dev/ttyS5',1250000, 1.3)
+        while not self.kondo.open('/dev/ttyS5',1250000, 1.3):
+            print("Waiting for kondo controller conection...")
+            time.sleep(1)
+        #self.kondo.open(uart)
         #self.kondo.motionPlay(25)
         
 
@@ -185,10 +194,10 @@ class Motion:
         return servoDatasOrdered
 
     def walk_Initial_Pose(self):
-        if not self.falling_Test() == 0:
-            if self.falling_Flag == 3: print('STOP!')
-            else: print('FALLING!!!', self.falling_Flag)
-            return[]
+        # if not self.falling_Test() == 0:
+        #     if self.falling_Flag == 3: print('STOP!')
+        #     else: print('FALLING!!!', self.falling_Flag)
+        #     return[]
         self.xtr = self.xtl = 0
         framestep = self.simThreadCycleInMs//10
         for j in range (self.initPoses):
@@ -208,7 +217,13 @@ class Motion:
                     pos = int(angles[i]*1698 + 7500)
                     servoDatas.append( self.kondo.ServoData(self.ACTIVESERVOS[i][0],self.ACTIVESERVOS[i][1],pos))
                 servoDatas = self.reOrderServoData(servoDatas)
-                a=self.kondo.setServoPos (servoDatas, self.frames_per_cycle)
+
+                if (j == 0):
+                    a=self.kondo.setServoPos (servoDatas, 10)
+                    time.sleep(0.250)
+                else:    
+                    a=self.kondo.setServoPos (servoDatas, self.frames_per_cycle)
+                
                 if comp == "OpenMV":
                     time1 = self.pyb.elapsed_millis(start1)
                     self.pyb.delay(self.frame_delay - time1)
@@ -217,10 +232,10 @@ class Motion:
                     time.sleep(time1)
 
     def walk_Cycle(self, stepLength,sideLength, rotation,cycle, number_Of_Cycles):
-        if not self.falling_Test() == 0:
-            if self.falling_Flag == 3: print('STOP!')
-            else: print('FALLING!!!', self.falling_Flag)
-            return[]
+        # if not self.falling_Test() == 0:
+        #     if self.falling_Flag == 3: print('STOP!')
+        #     else: print('FALLING!!!', self.falling_Flag)
+        #     return[]
         self.stepLength = stepLength
         self.sideLength = sideLength
         self.rotation = math.degrees(rotation)
@@ -341,10 +356,10 @@ class Motion:
         self.xr, self.xl, self.yr, self.yl = xr_old, xl_old, yr_old, yl_old
 
     def walk_Final_Pose(self):
-        if not self.falling_Test() == 0:
-            if self.falling_Flag == 3: print('STOP!')
-            else: print('FALLING!!!', self.falling_Flag)
-            return[]
+        # if not self.falling_Test() == 0:
+        #     if self.falling_Flag == 3: print('STOP!')
+        #     else: print('FALLING!!!', self.falling_Flag)
+        #     return[]
         framestep = self.simThreadCycleInMs//10
         for j in range (self.initPoses):
             if comp == "OpenMV": start1 = self.pyb.millis()
@@ -376,10 +391,10 @@ class Motion:
                     time.sleep(time1)
 
     def kick(self, first_Leg_Is_Right_Leg, small = False):
-        if not self.falling_Test() == 0:
-            if self.falling_Flag == 3: print('STOP!')
-            else: print('FALLING!!!', self.falling_Flag)
-            return[]
+        # if not self.falling_Test() == 0:
+        #     if self.falling_Flag == 3: print('STOP!')
+        #     else: print('FALLING!!!', self.falling_Flag)
+        #     return[]
         gaitHeight = 210
         stepHeight = 55
         stepLength = 64

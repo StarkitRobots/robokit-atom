@@ -1,10 +1,13 @@
+#!/usr/bin/env python3
+
 import rospy
-from motion.srv import Motion, Walk
+from core.srv import MotionService, WalkService
+import time
 
 def walk_client(n, step, side, ang):
     rospy.wait_for_service('walk_service')
     try:
-        a = rospy.ServiceProxy('walk_service', Walk)
+        a = rospy.ServiceProxy('walk_service', WalkService)
         a(n, step, side, ang)
     except rospy.ServiceException as e:
         print("Service call failed:", e)
@@ -12,13 +15,22 @@ def walk_client(n, step, side, ang):
 def motion_client(motion_id):
     rospy.wait_for_service('motion_service')
     try:
-        a = rospy.ServiceProxy('motion_service', Motion)
+        a = rospy.ServiceProxy('motion_service', MotionService)
         a(motion_id)
     except rospy.ServiceException as e:
         print("Service call failed:", e)
 
 if __name__ == "__main__":
-    walk_client(0, 0, 0, 0.0)
-    motion_client('move_head')
+    num = 10
+    stepLength = 64
+    sideLength = 0
+    rotation = 0
+
+    walk_client(True, stepLength, 0, 0.0)
+    time.sleep(5)
+    walk_client(False, stepLength, 0, 0.0)
+    walk_client(False, stepLength, 0, 0.0)
+
+    motion_client('test_head')
 
         
