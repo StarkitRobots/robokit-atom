@@ -1,4 +1,4 @@
-string[] name
-float32[] position
+string[] names
+float32[] positions
 ---
 bool success

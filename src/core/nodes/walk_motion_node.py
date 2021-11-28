@@ -60,14 +60,15 @@ class MotionServer:
         return True
 
     def handle_servo(self, req):
-        name = req.name
-        position = req.position
+        names = req.names
+        positions = req.positions
         start1 = time.perf_counter()
         servoDatas = []
-        for i in range(len(name)):
-            pos = int(position[i]*1698 + 7500)
-            servoDatas.append(self.motion.kondo.ServoData(self.servo_config[name[i]][0],
-                                                          self.servo_config[name[i]][1],
+
+        for name, position in zip(names, positions):
+            pos = int(position * 1698 + 7500)
+            servoDatas.append(self.motion.kondo.ServoData(self.servo_config[name][0],
+                                                          self.servo_config[name][1],
                                                           pos))
         servoDatas = self.motion.reOrderServoData(servoDatas)
             
