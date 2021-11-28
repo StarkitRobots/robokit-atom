@@ -39,8 +39,8 @@ class MotionServer:
         self.step_length = req.step_length
         self.side_length = req.side_length
         self.angle = req.angle
-
-        self.last_step = self.walk_enabled and not walk_enabled
+        if not self.last_step:
+            self.last_step = self.walk_enabled and not walk_enabled
         self.walk_enabled = walk_enabled
         return self.walk_enabled or self.last_step
 
@@ -70,6 +70,7 @@ class MotionServer:
 
         if self.last_step:
             print("Last step")
+            self.last_step = False
             self.walk_cycles = 0
             self.motion.walk_Cycle(
                 self.step_length, self.side_length, self.angle, 99, 100)

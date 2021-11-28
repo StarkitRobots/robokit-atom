@@ -33,3 +33,6 @@ To launch motion node:
 ```bash
 rosrun core walk_motion_node.py
 ```
+
+
+

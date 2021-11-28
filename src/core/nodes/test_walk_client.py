@@ -29,7 +29,7 @@ if __name__ == "__main__":
     walk_client(True, stepLength, 0, 0.0)
     time.sleep(5)
     walk_client(False, stepLength, 0, 0.0)
-    walk_client(False, stepLength, 0, 0.0)
+    # walk_client(False, stepLength, 0, 0.0)
 
     motion_client('test_head')
 
