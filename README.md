@@ -34,5 +34,17 @@ To launch motion node:
 rosrun core walk_motion_node.py
 ```
 
+## ROS debug
+
+1. On PC
+
+```bash
+export ROS_MASTER_URI=http://10.0.0.25:11311
+```
+2. On robot:
+
+```bash
+export ROS_IP=10.0.0.25
+```
 
 

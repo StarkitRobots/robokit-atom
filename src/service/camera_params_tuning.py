@@ -38,7 +38,7 @@ while (True):
 
     mask_3_channels = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
 
-    result = np.concatenate((frame, hsv, mask_3_channels), axis = 1)
+    result = np.concatenate((frame, mask_3_channels), axis = 1)
     cv2.imshow ("Colorbars", result)
 
     #os.system ('clear')

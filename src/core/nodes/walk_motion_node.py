@@ -46,8 +46,8 @@ class MotionServer:
         self.step_length = req.step_length
         self.side_length = req.side_length
         self.angle = req.angle
-
-        self.last_step = self.walk_enabled and not walk_enabled
+        if not self.last_step:
+            self.last_step = self.walk_enabled and not walk_enabled
         self.walk_enabled = walk_enabled
         return self.walk_enabled or self.last_step
 
@@ -70,7 +70,7 @@ class MotionServer:
             servoDatas.append(self.motion.kondo.ServoData(self.servo_config[name][0],
                                                           self.servo_config[name][1],
                                                           pos))
-        servoDatas = self.motion.reOrderServoData(servoDatas)
+        # servoDatas = self.motion.reOrderServoData(servoDatas)
             
         a = self.motion.kondo.setServoPos(servoDatas, self.motion.frames_per_cycle)
         
@@ -84,7 +84,7 @@ class MotionServer:
         s_num = rospy.Service('walk_service', WalkService, self.handle_walk)
         s_str = rospy.Service(
             'motion_service', MotionService, self.handle_motion)
-        s_serv = rospy.Service('servo_srvice', ServoService, self.handle_servo)
+        s_serv = rospy.Service('servo_service', ServoService, self.handle_servo)
         rospy.loginfo(f"Launched \033[92mwalk_service\033[0m, \033[92mservo_service\033[0m and \033[92mmotion_service\033[0m")
         
         while True:
@@ -98,6 +98,7 @@ class MotionServer:
 
         if self.last_step:
             print("Last step")
+            self.last_step = False
             self.walk_cycles = 0
             self.motion.walk_Cycle(
                 self.step_length, self.side_length, self.angle, 99, 100)
