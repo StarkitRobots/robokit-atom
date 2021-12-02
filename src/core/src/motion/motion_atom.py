@@ -12,7 +12,15 @@ from .kondo_controller import Rcb4BaseLib
 comp = "Atom"
 
 class Motion:
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
+        self.frame_delay = self.config["FRAME_DELAY"]
+        self.frames_per_cycle = self.config["FRAMES_PER_CYCLE"]
+        self.port = self.config["UART_PORT"]
+        self.speed = self.config["UART_SPEED"]
+        self.rotation_shift = self.config["ROTATION_SHIFT"]
+        self.motion_shift_correction_x = -self.config['MOTION_SHIFT_TEST_X'] / 21
+        self.motion_shift_correction_y = -self.config['MOTION_SHIFT_TEST_Y'] / 21
         self.ACTIVESERVOS = [(10,2),(9,2),(8,2),(7,2),(6,2),(5,2),(4,2),
                 (3,2),(2,2),(1,2),(0,2),(10,1),(9,1),(8,1),
                 (7,1),(6,1),(5,1),(4,1),(3,1),(2,1),(1,1)]
@@ -49,8 +57,6 @@ class Motion:
                     31:['Soccer_Walk_FF1',0], 32:['Soccer_Walk_FF2',0], 33: ['Soccer_Get_UP_Stomach',0], 34:['Soccer_Get_UP_Face_Up',0],
                     35: ['Get_Up_Right',0], 36: ['PenaltyDefenceR',2000], 37: ['PenaltyDefenceL',2000]}
         self.TIK2RAD = 0.00058909
-        self.frame_delay = 25
-        self.frames_per_cycle = 2
         self.stepLength = 0.0    # -50 - +70. Best choise 64 for forward. Maximum safe value for backward step -50.
         self.sideLength = 0.0         # -20 - +20. Side step length to right (+) and to left (-)
         self.rotation = 0           # -45 - +45 degrees Centigrade per step + CW, - CCW.
@@ -94,7 +100,7 @@ class Motion:
         self.kondo = Rcb4BaseLib()
 
         # self.kondo.open('/dev/ttyS5',1250000, 1.3)
-        while not self.kondo.open('/dev/ttyS5',1250000, 1.3):
+        while not self.kondo.open(self.port, self.speed, 1.3):
             print("Waiting for kondo controller conection...")
             time.sleep(1)
         #self.kondo.open(uart)
@@ -236,9 +242,11 @@ class Motion:
         #     if self.falling_Flag == 3: print('STOP!')
         #     else: print('FALLING!!!', self.falling_Flag)
         #     return[]
-        self.stepLength = stepLength
-        self.sideLength = sideLength
-        self.rotation = math.degrees(rotation)
+        #self.stepLength = stepLength
+        #self.sideLength = sideLength
+        self.stepLength = stepLength + self.motion_shift_correction_x
+        self.sideLength = sideLength - self.motion_shift_correction_y
+        self.rotation = math.degrees(rotation+self.rotation_shift)
         rotation = -self.rotation/222
         alpha = 0
         alpha01 = math.pi/self.fr1*2
@@ -250,7 +258,11 @@ class Motion:
         dy0_typical = self.sideLength/(2*self.fr1+self.fr2+ 2 * framestep)*framestep        # CoM propulsion sideways per framestep
         xr_old, xl_old, yr_old, yl_old = self.xr, self.xl, self.yr, self.yl
         # correction of body tilt forward
-        self.xr, self.xl = 0.01, 0.01 # ['BODY_TILT_AT_WALK']
+        #self.xr, self.xl = 0.01, 0.01 # ['BODY_TILT_AT_WALK']
+         # correction of body tilt forward
+        self.xr, self.xl = self.config['BODY_TILT_AT_WALK'], self.config['BODY_TILT_AT_WALK']   #
+        # correction of sole skew depending on side angle of body when step pushes land
+        self.yr, self.yl = - self.config['SOLE_LANDING_SKEW'], self.config['SOLE_LANDING_SKEW']
         for iii in range(0,frameNumberPerCycle,framestep):
             if comp == "OpenMV": start1 = self.pyb.millis()
             else: start1 = time.perf_counter()

@@ -4,10 +4,10 @@
     <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
   
     <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
-        <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+        <param name="vision_config" type="string" value="$(find competitions)/config/basketball/ball_config.json" />
     </node>
      <node pkg="core" name="basketcase" type="vision_node.py" output="screen"> 
-        <param name="vision_config" type="string" value="$(find core)/config/basketcase_config.json" />
+        <param name="vision_config" type="string" value="$(find competitions)/config/basketball/basketcase_config.json" />
     </node>
 
     <!-- <node pkg="core" name="basket" type="vision_node.py" output="screen"> 

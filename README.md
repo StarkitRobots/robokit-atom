@@ -35,4 +35,21 @@ rosrun core walk_motion_node.py
 ```
 
 
+```bash
+ssh atom@10.0.0.25
+```
+
+## ROS debug
+
+1. On PC
+
+```bash
+export ROS_MASTER_URI=http://10.0.0.25:11311
+```
+2. On robot:
+
+```bash
+export ROS_IP=10.0.0.25
+```
+
 

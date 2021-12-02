@@ -26,6 +26,7 @@ class CameraModel:
         Returns:
             turple: Normalized view vector from camera to pixel
         """
+        
         if self.do_undistortions:
              undistort_points = self.undistortPoints(pixel_x, pixel_y)
              print(undistort_points)
@@ -35,7 +36,8 @@ class CameraModel:
         focal_length = self.focal_length
         length = np.sqrt(delta_pixel_x**2 + delta_pixel_y**2 + focal_length**2)
 
-        return (delta_pixel_x/length, delta_pixel_y/length, focal_length/length)
+        #return (delta_pixel_x/length, delta_pixel_y/length, focal_length/length)
+        return (delta_pixel_x/focal_length, delta_pixel_y/focal_length, 1.0)
 
     def undistortPoints(self, x, y):
         points = np.array([x, y], dtype=np.float32)

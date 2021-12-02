@@ -1,0 +1,48 @@
+{
+    "competition": "basketball",
+    "object": "basketcase",
+    "node_name": "basketcase",
+    "pub_topic_name": "basketcase",
+    "processors": {
+        "name": "basketcase_detector",
+        "filters": [
+            {
+                "name": "Colorspace_transform",
+                "show": 1,
+                "from": "RGB",
+                "to": "HSV"
+            },
+            {
+                "name": "Inrange",
+                "show": 1,
+                "low_th": [
+                    0,
+                    146,
+                    0
+                ],
+                "high_th": [
+                    8,
+                    255,
+                    255
+                ]
+            },
+            {
+                "name": "Filter_connected_components",
+                "show": 1,
+                "area_low": 100,
+                "area_high": -1,
+                "hei_low": -1,
+                "hei_high": -1,
+                "wid_low": -1,
+                "wid_high": -1,
+                "den_low": -1,
+                "den_high": -1
+            },
+            {
+                "name": "Max_area_cc_bbox",
+                "show": 1 
+
+            }
+        ]
+    }
+}

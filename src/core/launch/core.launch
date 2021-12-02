@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <launch>
-    <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+    <!-- <include file="$(find usb_cam)/launch/usb_cam-test.launch"/> -->
     <node pkg="core" name="walk_motion" type="walk_motion_node.py" output="screen"> </node>
     <node pkg="core" name="model" type="model_service.py" output="screen"> </node>
 </launch>

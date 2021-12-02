@@ -5,7 +5,9 @@
     <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
         <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
     </node>
-
+    <node pkg="core" name="basketcase" type="vision_node.py" output="screen"> 
+        <param name="vision_config" type="string" value="$(find core)/config/basketcase_config.json" />
+    </node>
 </launch>
 
  

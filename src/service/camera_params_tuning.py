@@ -45,7 +45,7 @@ while (True):
 
     print (low_th, high_th)
 
-    key = cv2.waitKey(50) & 0xFF
+    key = cv2.waitKey(150) & 0xFF
 
     if (key == ord('q')):
         break
