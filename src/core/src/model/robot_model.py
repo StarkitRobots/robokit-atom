@@ -7,6 +7,7 @@ class RobotModel:
         self.neck_height = 0.035
         self.robot_height = self.base_height + self.neck_height
         self.tilt_bias = 0.0
+
         self.camera_pan = 0
         self.camera_tilt = 0
         self.camera_model = CameraModel()

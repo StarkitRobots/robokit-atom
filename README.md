@@ -34,6 +34,11 @@ To launch motion node:
 rosrun core walk_motion_node.py
 ```
 
+
+```bash
+ssh atom@10.0.0.25
+```
+
 ## ROS debug
 
 1. On PC
