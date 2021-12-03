@@ -67,7 +67,7 @@ class RobotModel:
         self_vec = self.tilt_rotate(self.tilt_bias, self_vec)
 
         x_self = self_vec[0] + self.neck_height * np.sin(-self.camera_tilt) * np.cos(self.camera_pan)
-        y_self = self.vec[1] + self.neck_height * np.sin(-self.camera_tilt) * np.sin(self.camera_pan)
+        y_self = self_vec[1] + self.neck_height * np.sin(-self.camera_tilt) * np.sin(self.camera_pan)
 
         return (-x_self, y_self)
 

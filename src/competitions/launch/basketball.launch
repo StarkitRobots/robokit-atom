@@ -2,11 +2,13 @@
 
 <launch>
     <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
-  
+    <include file="$(find core)/launch/core.launch"/>
+
+    <node pkg="competitions" name="basketball" type="basketball_node.py" output="screen"/>
     <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
         <param name="vision_config" type="string" value="$(find competitions)/config/basketball/ball_config.json" />
     </node>
-     <node pkg="core" name="basketcase" type="vision_node.py" output="screen"> 
+    <node pkg="core" name="basketcase" type="vision_node.py" output="screen"> 
         <param name="vision_config" type="string" value="$(find competitions)/config/basketball/basketcase_config.json" />
     </node>
 

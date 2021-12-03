@@ -32,10 +32,12 @@ def servos_client(names, positions):
 
 if __name__ == "__main__":
     num = 10
-    stepLength = 64
+    stepLength = 36
     sideLength = 0
-    rotation = 0
-
+    rotation = 0.0
+    while(True):
+        walk_client(True, stepLength, sideLength, rotation)
+        time.sleep(1)
     # walk_client(True, stepLength, 0, 0.0)
     # time.sleep(5)
     # walk_client(False, stepLength, 0, 0.0)

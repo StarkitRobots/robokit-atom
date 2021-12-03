@@ -8,13 +8,11 @@
         "filters": [
             {
                 "name": "Colorspace_transform",
-                "show": 1,
                 "from": "RGB",
                 "to": "HSV"
             },
             {
                 "name": "Inrange",
-                "show": 1,
                 "low_th": [
                     0,
                     146,
@@ -28,7 +26,6 @@
             },
             {
                 "name": "Filter_connected_components",
-                "show": 1,
                 "area_low": 100,
                 "area_high": -1,
                 "hei_low": -1,
@@ -39,8 +36,7 @@
                 "den_high": -1
             },
             {
-                "name": "Max_area_cc_bbox",
-                "show": 1 
+                "name": "Max_area_cc_bbox"
 
             }
         ]
