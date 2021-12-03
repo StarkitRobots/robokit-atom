@@ -1,0 +1,48 @@
+{
+    "competition": "archery",
+    "object": "target",
+    "node_name": "target",
+    "pub_topic_name": "target",
+    "processors": {
+        "name": "target_detector",
+        "filters": [
+            {
+                "name": "Colorspace_transform",
+                "show": 1,
+                "from": "RGB",
+                "to": "HSV"
+            },
+            {
+                "name": "Inrange",
+                "show": 1,
+                "low_th": [
+                    23,
+                    78,
+                    106
+                ],
+                "high_th": [
+                    52,
+                    174,
+                    239
+                ]
+            },
+            {
+                "name": "Filter_connected_components",
+                "show": 1,
+                "area_low": 100,
+                "area_high": -1,
+                "hei_low": -1,
+                "hei_high": -1,
+                "wid_low": -1,
+                "wid_high": -1,
+                "den_low": -1,
+                "den_high": -1
+            },
+            {
+                "name": "Max_area_cc_bbox",
+                "show": 1 
+
+            }
+        ]
+    }
+}
