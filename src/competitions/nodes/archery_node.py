@@ -221,6 +221,7 @@ class ArcheryFSM:
         self.timestamps = []
 
         self.pelvis_rot = 0
+        self.pelvis_rot_mistake = 0
         self.pointed_to_target = False
 
         self.period = 0
@@ -309,7 +310,7 @@ class ArcheryFSM:
                 
                 self.period, self.circle_x, self.circle_y, self.circle_r, self.circle_error = calculate_period(self.traj_coords[self.l_ind : ], self.timestamps)
                 
-                self.pelvis_rot = self.count_pelvis_rotation()
+                self.pelvis_rot = self.count_pelvis_rotation() + self.pelvis_rot_mistake
                 print(self.pelvis_rot)
                 self.traj_coords.clear()
                 if(abs(self.pelvis_rot) < 0.05):
