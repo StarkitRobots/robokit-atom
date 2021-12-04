@@ -10,7 +10,7 @@
     "ROTATION_SHIFT": -0.4,
     "UART_SPEED": 1250000,
     "FRAME_DELAY": 25,
-    "FRAMES_PER_CYCLE": 5,
+    "FRAMES_PER_CYCLE": 10,
     "UART_PORT": "/dev/ttyS5"
 
 }
