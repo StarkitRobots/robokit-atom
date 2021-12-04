@@ -60,7 +60,7 @@ class Motion:
         self.fr1 =8                  # frame number for 1-st phase of gait ( two legs on floor)
         self.fr2 = 12                # frame number for 2-nd phase of gait ( one leg in air)
         self.gaitHeight= 180         # Distance between Center of mass and floor in walk pose
-        self.stepHeight = 32.0       # elevation of sole over floor
+        self.stepHeight = 40 # 32      # elevation of sole over floor
         self.simThreadCycleInMs = 20
         self.initPoses = 400//self.simThreadCycleInMs
         self.limAlpha1 =LIMALPHA
