@@ -1,0 +1,7 @@
+bool walk_enabled
+int64 step_length
+int64 side_length
+float32 angle
+float32 tilt
+---
+bool walk_enabled

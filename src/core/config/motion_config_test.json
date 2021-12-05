@@ -1,4 +1,7 @@
 {
     "motion_0" : 0,
-    "test_head" : 69
+    "test_head" : 69,
+    "archery_ready" : 111,
+    "archery_setup" : 112,
+    "archery_pull" : 113
 }

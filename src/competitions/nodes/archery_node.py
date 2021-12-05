@@ -231,7 +231,8 @@ class ArcheryFSM:
         self.circle_error = 0
 
         self.l_ind = 0
-        self.time_delay = 1
+
+        self.time_delay = 1.1
         self.time_accuracy = 0.1
 
     def update_camera_frame(self, msg):
@@ -295,7 +296,6 @@ class ArcheryFSM:
         if(self.traj_coords[-1][0] > self.circle_x):
             angle_diff = 2 * math.pi - angle_diff
 
-        print(angle_diff)
         angular_speed = 2 * math.pi / self.period
 
         predicted_time = angle_diff / angular_speed
@@ -325,7 +325,8 @@ class ArcheryFSM:
                 print(self.pelvis_rot)
 
                 self.pointed_to_target = True
-                # self.move_pelvis()
+
+                self.move_pelvis()
                 self.traj_coords.clear()
 
 
@@ -373,10 +374,10 @@ class ArcheryFSM:
                 self.period, self.circle_x, self.circle_y, self.circle_r, self.circle_error = calculate_period(self.traj_coords[self.l_ind : ], self.timestamps)
 
                 pred_time = self.predict_time()
-                # print(pred_time)
+                print(pred_time)
 
                 if((pred_time - self.time_delay) < self.time_accuracy):
-                    return True
+                    return False
             else:
                 frame = self.cam_frame
                 trajectory_x, trajectory_y = find_target_center(frame)
@@ -394,7 +395,7 @@ if __name__ == "__main__":
     image_sub = rospy.Subscriber('/usb_cam/image_raw', Image, archery.update_camera_frame)
 
     archery.motion_client("archery_ready")
-    time.sleep(10)
+    input()
     archery.motion_client("archery_setup")
     time.sleep(4)
     archery.motion_client("archery_pull")

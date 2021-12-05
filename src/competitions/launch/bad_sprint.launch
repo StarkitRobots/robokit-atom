@@ -1,5 +1,5 @@
 <launch>
-   <node pkg="core" name="walk_motion" type="walk_motion_node.py" output="screen"></node> 
+   <node pkg="core" name="walk_motion" type="sprint_walk_motion_node.py" output="screen"></node> 
     
    <node pkg="core" name="model" type="model_service.py" output="screen"></node>
   
@@ -43,6 +43,6 @@
        <remap from="camera_info" to="$(arg camera)/camera_info"/>
      </node>
 
-    <node pkg="competitions" name="sprint_node" type="sprint_node.py" output="screen"> </node>
+    <node pkg="competitions" name="sprint_node" type="sprint_node.py"> </node>
     <!--node pkg="core" name="model" type="model_service.py" output="screen"> </node-->
 </launch>

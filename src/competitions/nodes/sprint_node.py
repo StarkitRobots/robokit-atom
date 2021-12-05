@@ -4,24 +4,27 @@ import rospy
 from geometry_msgs.msg import Point
 import time
 import numpy as np
-from core.srv import ModelService,  WalkService
+from core.srv import ModelService, WalkService, SprintWalkService
 from fiducial_msgs.msg import FiducialTransformArray
 from scipy.spatial.transform import Rotation
 # import model
 import math
 from std_msgs.msg import String
-
+import numpy as np
 start = 3.40
 end = 0.5
-critical_degree = 10 / math.pi
+critical_degree = 15 * math.pi / 180
 lateral_def = 0.2
 coeff_pan_forward = 0.03
 coeff_y_forward = 0.03
 coeff_pan_backward = 0.1
 coeff_y_backward = 0.1
-
+queue_size = 5
 
 class Sprint:
+
+    """run sprint competition """
+
     def __init__(self) -> None:
         self.camera_pan = 0
         self.camera_tilt = 0
@@ -33,7 +36,7 @@ class Sprint:
         self.backward_step = -36
         self.topic = "/logger"
         self.pub_log = rospy.Publisher(self.topic, String)
-        
+        self.pans = np.array([])
 
     def walk_service(self, enable, step_length = 0, side_length = 0, rotation = 0):
         try:
@@ -42,7 +45,7 @@ class Sprint:
             self.walk_service_client(enable, step_length, 0, rotation)
         except:
             pass
-            
+
 
     def update_aruco_pose(self, msg):
         if (len(msg.transforms) == 0):
@@ -56,11 +59,17 @@ class Sprint:
         #rospy.loginfo(f"Rotation: {self.my_position.rotation}")
         self.rotation_from_camera = Rotation.from_quat(
             [self.my_position.rotation.x, self.my_position.rotation.y, self.my_position.rotation.z, self.my_position.rotation.w])
-        self.my_pan = self.rotation_from_camera.as_euler('xyz')[2]
+        self.my_pan = self.rotation_from_camera.as_euler('xyz')[1]
         self.my_tilt = self.rotation_from_camera.as_euler('xyz')[0]
-        self.my_what = self.rotation_from_camera.as_euler('xyz')[1]
-        self.pub_log.publish("angels:   " + str(self.my_pan) +"   " +  str(self.my_tilt) + "    "+ str(self.my_what))
-        print(self.my_pan)
+        self.my_what = self.rotation_from_camera.as_euler('xyz')[2]
+        self.update_pans();
+        self.pub_log.publish("angels:   " + str(self.my_pan) +"  " +  str(self.my_tilt) + "    "+ str(self.my_what))
+
+    def update_pans(self):
+        if (len(self.pans) == queue_size):
+            self.pans = np.delete(0, self.pans)
+        self.pans = np.append(self.pans, self.my_pan)
+        self.my_pan = np.median(self.pans)
     def walking_forward_tick(self):
         # a(n, step, side, ang)
         # except rospy.ServiceException as e:
@@ -75,16 +84,15 @@ class Sprint:
             rospy.loginfo("Stop and go back")
             return False
         elif(self.my_pan > critical_degree):  # 10 degree
-            self.walk_service (True, self.forward_step, self.my_pan, self.my_position.translation.y* coeff_y_forward)
+            self.walk_service (True, self.forward_step, 0, min(-self.my_pan, -0.004))
             rospy.loginfo("go right")
             rospy.loginfo(f"my pan: {self.my_pan}, {self.my_tilt}")
         elif(self.my_pan < - critical_degree):
-            self.walk_service (True, self.forward_step, self.my_pan, self.my_position.translation.y * coeff_y_forward)
+            self.walk_service (True, self.forward_step,0,max(self.my_pan, 0.004))
             rospy.loginfo("go left")
             rospy.loginfo(f"my pan: {self.my_pan}, {self.my_tilt}")
         else:
-            self.walk_service(True, self.forward_step, self.my_pan * coeff_pan_forward,
-                        self.my_position.translation.y * coeff_y_forward)
+            self.walk_service(True, self.forward_step, 0,0)
             rospy.loginfo(f"my pan: {self.my_pan}, {self.my_tilt}")
             rospy.loginfo("go forward")
         return True
@@ -125,7 +133,7 @@ if __name__ == "__main__":
     rospy.loginfo("1")
     while True:
         flag_go_back = sprint_node.walking_forward_tick()
-        
+
         time.sleep(time_to_wait)
         if (flag_go_back == 0):
             break
