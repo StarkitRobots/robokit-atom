@@ -60,6 +60,9 @@ add_service_files(
   MotionService.srv
   WalkService.srv
   ServoService.srv
+  ImuService.srv
+  ButtonService.srv
+  SprintWalkService.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -167,6 +170,9 @@ catkin_install_python(PROGRAMS
   nodes/hsv_reader.py
   nodes/test_walk_client.py
   nodes/walk_motion_node.py
+  nodes/arduino_node.py
+  nodes/test_arduino_client.py
+  nodes/sprint_walk_motion_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

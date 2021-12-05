@@ -1,10 +1,10 @@
 {
     "competition": "basketball",
-    "object": "basketcase",
-    "node_name": "basketcase",
-    "pub_topic_name": "basketcase",
+    "object": "ball",
+    "node_name": "ball",
+    "pub_topic_name": "ball",
     "processors": {
-        "name": "basketcase_detector",
+        "name": "ball_detector",
         "filters": [
             {
                 "name": "Colorspace_transform",
@@ -14,14 +14,14 @@
             {
                 "name": "Inrange",
                 "low_th": [
+                    8,
                     0,
-                    139,
-                    75
+                    0
                 ],
                 "high_th": [
-                    4,
+                    27,
                     255,
-                    218
+                    255
                 ]
             },
             {
@@ -36,7 +36,9 @@
                 "den_high": -1
             },
             {
-                "name": "Max_area_cc_bbox"
+                "name": "Max_area_cc_bbox",
+                "show": 1
+
             }
         ]
     }
