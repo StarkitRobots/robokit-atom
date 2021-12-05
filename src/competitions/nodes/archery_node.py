@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# import sys
-# sys.path.append("kondo")
-# from kondo import Kondo
 import rospy
 import math
 import time
@@ -10,9 +7,9 @@ import cv_bridge
 import numpy as np
 from geometry_msgs.msg import Point
 from sensor_msgs.msg import Image
-from core.srv import ModelService
+from core.srv import MotionService, WalkService, ServoService, ImuService, ButtonService, ModelService
 from scipy import optimize
-# import model
+import model
 
 # class ExampleFSM:
 #     def __init__(self):
@@ -221,8 +218,11 @@ class ArcheryFSM:
         self.timestamps = []
 
         self.pelvis_rot = 0
-        self.pelvis_rot_mistake = 0
+        self.pelvis_rot_mistake = 0.1
+        self.pelvis_rot_const = 1.4
         self.pointed_to_target = False
+
+        self.number_of_frames = 100
 
         self.period = 0
         self.circle_x = 0
@@ -231,8 +231,8 @@ class ArcheryFSM:
         self.circle_error = 0
 
         self.l_ind = 0
-        self.time_delay = 0
-        self.time_accuracy = 0.01
+        self.time_delay = 1
+        self.time_accuracy = 0.1
 
     def update_camera_frame(self, msg):
         self.cam_frame = np.frombuffer(msg.data, dtype=np.uint8).reshape(msg.height, msg.width, -1)
@@ -249,10 +249,10 @@ class ArcheryFSM:
             rospy.loginfo("Service call failed: %s"%e)     
 
     def move_pelvis(self):
-        self.servos_client(["pelvis"], [self.pelvis_rot])
+        self.servos_client(["pelvis"], [-self.pelvis_rot*self.pelvis_rot_const])
 
     def release_the_bowstring(self):
-        self.servos_client(["left_finger_pitch"], 1)
+        self.servos_client(["left_finger_pitch"], [-1])
 
     @staticmethod
     def servos_client(names, positions):
@@ -260,6 +260,14 @@ class ArcheryFSM:
         try:
             servos_service = rospy.ServiceProxy('servo_service', ServoService)
             servos_service(names, positions)
+        except rospy.ServiceException as e:
+            print("Service call failed:", e)
+
+    def motion_client(self, motion_id):
+        rospy.wait_for_service('motion_service')
+        try:
+            a = rospy.ServiceProxy('motion_service', MotionService)
+            a(motion_id)
         except rospy.ServiceException as e:
             print("Service call failed:", e)
  
@@ -284,7 +292,10 @@ class ArcheryFSM:
         point_norm_vec = get_norm_vector(position)
         angle_diff = angle_b2v(current_vec, point_norm_vec)
         angle_diff = angle_diff if angle_diff > 0 else angle_diff + 2 * math.pi
- 
+        if(self.traj_coords[-1][0] > self.circle_x):
+            angle_diff = 2 * math.pi - angle_diff
+
+        print(angle_diff)
         angular_speed = 2 * math.pi / self.period
 
         predicted_time = angle_diff / angular_speed
@@ -295,8 +306,8 @@ class ArcheryFSM:
 
     def tick(self):
         if self.cam_frame is not None:
-            if(len(self.traj_coords) > 200) and (not self.pointed_to_target):
-                tail_len = 200
+            if(len(self.traj_coords) > self.number_of_frames) and (not self.pointed_to_target):
+                tail_len = self.number_of_frames
                 frame = self.cam_frame.copy()
                 # output = frame.copy()
                 trajectory_x, trajectory_y = find_target_center(frame)
@@ -310,13 +321,12 @@ class ArcheryFSM:
                 
                 self.period, self.circle_x, self.circle_y, self.circle_r, self.circle_error = calculate_period(self.traj_coords[self.l_ind : ], self.timestamps)
                 
-                self.pelvis_rot = self.count_pelvis_rotation() + self.pelvis_rot_mistake
+                self.pelvis_rot += self.count_pelvis_rotation()
                 print(self.pelvis_rot)
+
+                self.pointed_to_target = True
+                # self.move_pelvis()
                 self.traj_coords.clear()
-                if(abs(self.pelvis_rot) < 0.05):
-                    self.pointed_to_target = True
-                # if(self.pelvis_rot > 1):
-                #     self.move_pelvis()
 
 
                 # Visual output
@@ -350,8 +360,8 @@ class ArcheryFSM:
                 # key = cv2.waitKey(50) & 0xFF
                 # if (key == ord('q')):
                 #     break
-            elif(len(self.traj_coords) > 200) and (self.pointed_to_target):
-                tail_len = 200
+            elif(len(self.traj_coords) > self.number_of_frames) and (self.pointed_to_target):
+                tail_len = self.number_of_frames
                 frame = self.cam_frame.copy()
                 trajectory_x, trajectory_y = find_target_center(frame)
                 self.traj_coords.append([trajectory_x, trajectory_y])
@@ -363,9 +373,10 @@ class ArcheryFSM:
                 self.period, self.circle_x, self.circle_y, self.circle_r, self.circle_error = calculate_period(self.traj_coords[self.l_ind : ], self.timestamps)
 
                 pred_time = self.predict_time()
+                # print(pred_time)
 
                 if((pred_time - self.time_delay) < self.time_accuracy):
-                    return False
+                    return True
             else:
                 frame = self.cam_frame
                 trajectory_x, trajectory_y = find_target_center(frame)
@@ -380,15 +391,16 @@ class ArcheryFSM:
 if __name__ == "__main__":
     rospy.init_node("archery")
     archery = ArcheryFSM()
-    #kondo = Kondo()
     image_sub = rospy.Subscriber('/usb_cam/image_raw', Image, archery.update_camera_frame)
 
-    # kondo.run_motion(111)
-    # kondo.run_motion(112)
-    # kondo.run_motion(113)
+    archery.motion_client("archery_ready")
+    time.sleep(10)
+    archery.motion_client("archery_setup")
+    time.sleep(4)
+    archery.motion_client("archery_pull")
     to_continue = True
     while to_continue:
         time.sleep(0.05)
         to_continue = archery.tick()
     print('shoot')
-    # archery.release_the_bowstring()
+    archery.release_the_bowstring()
