@@ -1,0 +1,257 @@
+<?xml version="1.0" ?>
+
+<robot name="wheeled_tractor" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <xacro:property name="standard_friction" value="1" />
+  <xacro:property name="wheel_friction_mu1" value="100" />
+  <xacro:property name="wheel_friction_mu2" value="100" />
+  <xacro:property name="selfCollide" value="true" />
+  <xacro:property name="kp" value="10000000.0" />
+  <xacro:property name="kd" value="100" />
+  <xacro:property name="fdir1" value="1 0 0" />
+  <xacro:property name="minDepth" value="0.003" />
+  <xacro:property name="maxContacts" value="20" />
+  <xacro:property name="maxVel" value="0.0" />
+
+  <!-- <gazebo reference="trunk_1">
+    <mu1>${wheel_friction_mu1}</mu1>
+    <mu2>${wheel_friction_mu2}</mu2>
+    <selfCollide>${selfCollide}</selfCollide>
+    <kp value="${kp}" />
+    <kd value="${kd}" />
+    <fdir1 value="${fdir1}"/>
+    <minDepth>${minDepth}</minDepth>
+    <maxContacts>${maxContacts}</maxContacts>
+    <maxVel>${maxVel}</maxVel>
+  </gazebo>
+
+  <gazebo reference="wheel_br">
+    <mu1>${wheel_friction_mu1}</mu1>
+    <mu2>${wheel_friction_mu2}</mu2>
+    <selfCollide>${selfCollide}</selfCollide>
+    <kp value="${kp}" />
+    <kd value="${kd}" />
+    <fdir1 value="${fdir1}"/>
+    <minDepth>${minDepth}</minDepth>
+    <maxContacts>${maxContacts}</maxContacts>
+    <maxVel>${maxVel}</maxVel>
+  </gazebo> -->
+
+  <gazebo reference="trunk_1">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="u_neck">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="head">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <!-- <gazebo reference="imu_link">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo> -->
+
+  <!-- <gazebo reference="camera">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo> -->
+
+  <gazebo reference="u_shoulder_1">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_humerus">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_pre_elbow">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_elbow">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_hand">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_finger">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="u_shoulder_2">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_humerus">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_pre_elbow">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_elbow">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_hand">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_finger">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="pelvis_link">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="u_block_2">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_hip_joint">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_knee_link">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="tibia_2">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_ankle_joint">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="left_foot">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="u_block_1">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_hip_joint">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_knee_link">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="tibia_1">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_ankle_joint">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="right_foot">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="trunk">
+    <mu1>${standard_friction}</mu1>
+    <mu2>${standard_friction}</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+</robot>

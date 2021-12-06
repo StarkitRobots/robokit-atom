@@ -1,0 +1,221 @@
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50  
+
+# Position Controllers ---------------------------------------
+head_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: head_pitch
+  pid:
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+head_yaw_position_controller:
+  type: position_controllers/JointPositionController
+  joint: head_yaw
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_shoulder_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_shoulder_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_shoulder_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_shoulder_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_shoulder_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_shoulder_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_shoulder_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_shoulder_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_shoulder_twirl_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_shoulder_twirl
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_shoulder_twirl_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_shoulder_twirl
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_elbow_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_elbow_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_elbow_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_elbow_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_hand_twirl_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_hand_twirl
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_hand_twirl_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_hand_twirl
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_finger_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_finger_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_finger_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_finger_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+pelvis_position_controller:
+  type: position_controllers/JointPositionController
+  joint: pelvis
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_hip_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_hip_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_hip_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_hip_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_hip_yaw_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_hip_yaw
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_hip_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_hip_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_hip_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_hip_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_hip_yaw_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_hip_yaw
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_knee_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_knee
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_knee_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_knee
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_ankle_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_ankle_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+left_ankle_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_ankle_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_ankle_pitch_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_ankle_pitch
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0
+
+right_ankle_roll_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_ankle_roll
+  pid: 
+    p: 50.0 
+    i: 0.0 
+    d: 0.0

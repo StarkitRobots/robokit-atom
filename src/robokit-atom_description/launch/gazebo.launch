@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<launch>
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0.5"/>
+  
+  <param command="$(find xacro)/xacro --inorder '$(find robokit-atom_description)/urdf/robokit-atom.xacro' gazebo:=true" name="robot_description"/>
+
+  
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 -0.49 0 0 0 trunk base_footprint 40" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+  	<param name = "use_gui" value = "False"/>
+  </node>
+
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find robokit-atom_description)/config/robokit-atom_gazebo.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" 
+    args="joint_state_controller 
+          head_pitch_position_controller  
+          head_yaw_position_controller 
+          left_shoulder_pitch_position_controller 
+          left_shoulder_roll_position_controller 
+          left_shoulder_twirl_position_controller 
+          right_shoulder_twirl_position_controller 
+          right_shoulder_pitch_position_controller 
+          right_shoulder_roll_position_controller 
+          right_elbow_pitch_position_controller 
+          left_elbow_pitch_position_controller 
+          left_hand_twirl_position_controller 
+          right_hand_twirl_position_controller 
+          right_finger_pitch_position_controller 
+          left_finger_pitch_position_controller 
+          pelvis_position_controller 
+          right_hip_pitch_position_controller 
+          right_hip_roll_position_controller 
+          right_hip_yaw_position_controller 
+          left_hip_pitch_position_controller 
+          left_hip_roll_position_controller 
+          left_hip_yaw_position_controller 
+          left_knee_position_controller 
+          right_knee_position_controller 
+          right_ankle_pitch_position_controller 
+          right_ankle_roll_position_controller 
+          left_ankle_pitch_position_controller 
+          left_ankle_roll_position_controller 
+          "/>
+
+
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-param robot_description -urdf -model Robokit-Atom -x $(arg x) -y $(arg y) -z $(arg z)"
+    output="screen" />
+</launch>

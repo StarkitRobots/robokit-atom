@@ -1,0 +1,43 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  info [
+    "Simulation of the Robocup Standard Platform League"
+  ]
+  title "Robocup"
+  basicTimeStep 20
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "NAO foot material"
+      coulombFriction [
+        7
+      ]
+      bounce 0.3
+      bounceVelocity 0.003
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.07473144883654854 0.9814527514385184 0.17653811840096195 2.2694342845455973
+  position 2.6191915949201428 1.2652741566020262 -1.3958238320036407
+  follow "soccer ball"
+}
+Ball {
+  translation 0.299161 0.04 -0.0461511
+}
+TexturedBackground {
+  texture "stadium"
+}
+TexturedBackgroundLight {
+  texture "stadium"
+  castShadows FALSE
+}
+RobocupSoccerField {
+  rotation 1 0 0 -1.5709
+  coloredPosts FALSE
+}
+Kondo-atom {
+ 
+  translation 0 0.41 4.18038e-07
+  rotation 0.5651510487225889 -0.5828635066841099 -0.5838445210016625 -2.1160303061004253
+}
