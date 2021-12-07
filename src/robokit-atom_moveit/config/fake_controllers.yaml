@@ -1,0 +1,122 @@
+controller_list:
+  - name: fake_left_leg_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - left_hip_yaw
+      - left_hip_roll
+      - left_hip_pitch
+      - left_knee
+      - left_ankle_pitch
+      - left_ankle_roll
+  - name: fake_right_leg_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - right_hip_yaw
+      - right_hip_roll
+      - right_hip_pitch
+      - right_knee
+      - right_ankle_pitch
+      - right_ankle_roll
+  - name: fake_right_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - right_shoulder_pitch
+      - right_shoulder_roll
+      - right_shoulder_twirl
+      - right_elbow_pitch
+      - right_hand_twirl
+      - right_finger_pitch
+  - name: fake_left_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - left_shoulder_pitch
+      - left_shoulder_roll
+      - left_shoulder_twirl
+      - left_elbow_pitch
+      - left_hand_twirl
+      - left_finger_pitch
+  - name: fake_left_hand_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - left_hand_twirl
+      - left_finger_pitch
+  - name: fake_right_hand_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - right_hand_twirl
+      - right_finger_pitch
+  - name: fake_legs_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - pelvis
+      - left_hip_yaw
+      - left_hip_roll
+      - left_hip_pitch
+      - left_knee
+      - left_ankle_pitch
+      - left_ankle_roll
+      - right_hip_yaw
+      - right_hip_roll
+      - right_hip_pitch
+      - right_knee
+      - right_ankle_pitch
+      - right_ankle_roll
+  - name: fake_arms_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - left_shoulder_pitch
+      - left_shoulder_roll
+      - left_shoulder_twirl
+      - left_elbow_pitch
+      - left_hand_twirl
+      - left_finger_pitch
+      - right_shoulder_pitch
+      - right_shoulder_roll
+      - right_shoulder_twirl
+      - right_elbow_pitch
+      - right_hand_twirl
+      - right_finger_pitch
+  - name: fake_torso_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - pelvis
+  - name: fake_whole_body_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - head_yaw
+      - head_pitch
+      - left_shoulder_pitch
+      - left_shoulder_roll
+      - left_shoulder_twirl
+      - left_elbow_pitch
+      - left_hand_twirl
+      - left_finger_pitch
+      - pelvis
+      - left_hip_yaw
+      - left_hip_roll
+      - left_hip_pitch
+      - left_knee
+      - left_ankle_pitch
+      - left_ankle_roll
+      - right_hip_yaw
+      - right_hip_roll
+      - right_hip_pitch
+      - right_knee
+      - right_ankle_pitch
+      - right_ankle_roll
+      - right_shoulder_pitch
+      - right_shoulder_roll
+      - right_shoulder_twirl
+      - right_elbow_pitch
+      - right_hand_twirl
+      - right_finger_pitch
+  - name: fake_head_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - head_yaw
+      - head_pitch
+initial:  # Define initial robot poses per group
+#  - group: left_leg
+#    pose: home
+
+  []
