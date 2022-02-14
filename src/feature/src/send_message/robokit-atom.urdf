@@ -1,0 +1,3139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+
+<robot
+
+  name="robokit-atom">
+
+  <link
+
+    name="trunk_1">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.00049613750860005 0.0229004465041265 -0.0446042851087862"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.522855766489177" />
+
+      <inertia
+
+        ixx="0.0003953596679444"
+
+        ixy="1.11055335813116E-05"
+
+        ixz="-1.41906719822236E-05"
+
+        iyy="0.000617061895947365"
+
+        iyz="-3.18439228347428E-06"
+
+        izz="0.000392043856997511" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/trunk_1.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="1 1 1 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/trunk_1.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <link
+
+    name="u_neck">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.000264320510941577 0.0109732648966059 2.62618581766351E-15"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0130011392237544" />
+
+      <inertia
+
+        ixx="1.19761205374274E-06"
+
+        ixy="-3.70987578659839E-08"
+
+        ixz="-4.88114992164222E-19"
+
+        iyy="3.01332251835639E-06"
+
+        iyz="-2.06863229336064E-20"
+
+        izz="3.38897431921528E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_neck.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_neck.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="head_yaw"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0 0.019"
+
+      rpy="-1.57079632679489 0 0" />
+
+    <parent
+
+      link="trunk_1" />
+
+    <child
+
+      link="u_neck" />
+
+    <axis
+
+      xyz="0 -1 0" />
+
+  </joint>
+
+  <link
+
+    name="head">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.0276477193295828 0.0902940685780666 6.05561842868105E-05"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.934314838511598" />
+
+      <inertia
+
+        ixx="0.00175455277925189"
+
+        ixy="4.88565985944184E-07"
+
+        ixz="1.14787027986893E-08"
+
+        iyy="0.00166992848544266"
+
+        iyz="-9.62356192001647E-09"
+
+        izz="0.000900470746538532" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/head.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/head.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="head_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0 0"
+
+      rpy="-1.5707963267949 0 -1.5707963267949" />
+
+    <parent
+
+      link="u_neck" />
+
+    <child
+
+      link="head" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="camera">
+
+    <inertial>
+
+      <origin
+
+        xyz="5.17649616747773E-15 -3.88578058618805E-16 -4.23272528138341E-16"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="9.75000000000002E-07" />
+
+      <inertia
+
+        ixx="4.06250000000002E-14"
+
+        ixy="-3.62993542287724E-31"
+
+        ixz="-6.38918570285991E-31"
+
+        iyy="4.06250000000001E-14"
+
+        iyz="1.59729642571498E-31"
+
+        izz="4.06250000000001E-14" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/camera.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/camera.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="camera_frame"
+
+    type="fixed">
+
+    <origin
+
+      xyz="0.0267434099643198 0.0177641070913566 4.99999996526588E-05"
+
+      rpy="1.5707963267949 1.5707963267949 0" />
+
+    <parent
+
+      link="head" />
+
+    <child
+
+      link="camera" />
+
+    <axis
+
+      xyz="0 0 0" />
+
+  </joint>
+
+  <link
+
+    name="u_shoulder_1">
+
+    <inertial>
+
+      <origin
+
+        xyz="1.81306358815192E-13 -0.000641340632855175 -0.00659345592171711"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0216490959620493" />
+
+      <inertia
+
+        ixx="8.13105749894706E-06"
+
+        ixy="-2.72040053565123E-14"
+
+        ixz="-6.49595439019734E-17"
+
+        iyy="2.9422881153757E-06"
+
+        iyz="-1.2598330126321E-07"
+
+        izz="6.99828015320693E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_shoulder_1.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_shoulder_1.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_shoulder_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.0550528426020857 0 -0.0179999999999997"
+
+      rpy="3.14159265358979 1.5707963267949 0" />
+
+    <parent
+
+      link="trunk_1" />
+
+    <child
+
+      link="u_shoulder_1" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_humerus">
+
+    <inertial>
+
+      <origin
+
+        xyz="4.08381245486922E-11 -0.0366732817414739 0.0100052458144246"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.108055931314796" />
+
+      <inertia
+
+        ixx="2.30548285340524E-05"
+
+        ixy="-4.22918553902952E-11"
+
+        ixz="-4.2309939426367E-11"
+
+        iyy="1.91321620950096E-05"
+
+        iyz="1.78233142046821E-07"
+
+        izz="1.39624498444794E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_humerus.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_humerus.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_shoulder_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 -0.00297186387086125 -0.0211471573979146"
+
+      rpy="1.5707963267949 1.51843644923509 -3.14159265358979" />
+
+    <parent
+
+      link="u_shoulder_1" />
+
+    <child
+
+      link="left_humerus" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_pre_elbow">
+
+    <inertial>
+
+      <origin
+
+        xyz="-3.20915361541607E-05 -0.0113594174393189 -0.0136782837699915"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0462382384447892" />
+
+      <inertia
+
+        ixx="7.80369306780788E-06"
+
+        ixy="-1.56147420130457E-08"
+
+        ixz="8.92652080569709E-11"
+
+        iyy="5.27906305675419E-06"
+
+        iyz="1.65065109079581E-09"
+
+        izz="1.01724089971967E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_pre_elbow.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_pre_elbow.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_shoulder_twirl"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 -0.0710000000000001 0.00347186387084668"
+
+      rpy="-1.5707963267949 0 0" />
+
+    <parent
+
+      link="left_humerus" />
+
+    <child
+
+      link="left_pre_elbow" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_elbow">
+
+    <inertial>
+
+      <origin
+
+        xyz="1.40764620012307E-11 -0.016852909405683 0.000526043392192449"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0263941052965311" />
+
+      <inertia
+
+        ixx="8.22620109048213E-06"
+
+        ixy="4.886820398765E-16"
+
+        ixz="-2.71402465090607E-14"
+
+        iyy="7.16435420729983E-06"
+
+        iyz="-1.25983301520662E-07"
+
+        izz="3.03743170696094E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_elbow.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_elbow.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_elbow_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.000250000000003872 0 -0.0149999999999999"
+
+      rpy="1.5707963267949 0 -1.57079632679493" />
+
+    <parent
+
+      link="left_pre_elbow" />
+
+    <child
+
+      link="left_elbow" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="left_hand">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.0179938599509411 -0.00563594040646999 1.54181979005648E-05"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0943109576765618" />
+
+      <inertia
+
+        ixx="1.87340560270071E-05"
+
+        ixy="-2.47535200903971E-07"
+
+        ixz="-2.9373595488046E-14"
+
+        iyy="1.19876997174146E-05"
+
+        iyz="1.57602968382811E-08"
+
+        izz="1.88259850453053E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_hand.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_hand.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_hand_twirl"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 -0.047 0"
+
+      rpy="1.5707963267949 0 1.57079632679489" />
+
+    <parent
+
+      link="left_elbow" />
+
+    <child
+
+      link="left_hand" />
+
+    <axis
+
+      xyz="-1 0 0" />
+
+  </joint>
+
+  <link
+
+    name="left_finger">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.0026104257984549 -0.0181848034403391 -0.0191307335296302"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0091110886555886" />
+
+      <inertia
+
+        ixx="3.27295117248011E-06"
+
+        ixy="2.91076781921759E-07"
+
+        ixz="-4.56804920428464E-09"
+
+        iyy="1.43869115753782E-06"
+
+        iyz="3.32144793388496E-08"
+
+        izz="2.25791281347612E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_finger.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_finger.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_finger_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.0304999999999991 0.0113001797402845 0.0192500000000059"
+
+      rpy="0 0 -1.57079632679489" />
+
+    <parent
+
+      link="left_hand" />
+
+    <child
+
+      link="left_finger" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="u_shoulder_2">
+
+    <inertial>
+
+      <origin
+
+        xyz="-2.93085417046868E-10 0.0145537014761975 0.000641340632855471"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0216490959620493" />
+
+      <inertia
+
+        ixx="8.13105749894703E-06"
+
+        ixy="2.2761253140476E-14"
+
+        ixz="2.46653504300701E-14"
+
+        iyy="6.99828015320691E-06"
+
+        iyz="1.25983301263197E-07"
+
+        izz="2.94228811537569E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_shoulder_2.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_shoulder_2.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_shoulder_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.0762 0 -0.0180000000000002"
+
+      rpy="1.57079632983352 -1.57079630572147 3.14159265055117" />
+
+    <parent
+
+      link="trunk_1" />
+
+    <child
+
+      link="u_shoulder_2" />
+
+    <axis
+
+      xyz="0 -1 0" />
+
+  </joint>
+
+  <link
+
+    name="right_humerus">
+
+    <inertial>
+
+      <origin
+
+        xyz="7.89607823570293E-11 -0.036673281470574 -0.00803338190205835"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.108055930898526" />
+
+      <inertia
+
+        ixx="2.30548284984716E-05"
+
+        ixy="4.23224558239494E-11"
+
+        ixz="-4.22906239038116E-11"
+
+        iyy="1.91321621249474E-05"
+
+        iyz="-1.78233154682525E-07"
+
+        izz="1.39624497603346E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_humerus.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_humerus.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_shoulder_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0 0"
+
+      rpy="0 0 -1.52409707845317" />
+
+    <parent
+
+      link="u_shoulder_2" />
+
+    <child
+
+      link="right_humerus" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="right_pre_elbow">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.00028209147740392 -0.0113594172256715 -0.0136782836589906"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0462382380005362" />
+
+      <inertia
+
+        ixx="7.80369306000345E-06"
+
+        ixy="-1.56147490807496E-08"
+
+        ixz="8.93130317358286E-11"
+
+        iyy="5.27906301037145E-06"
+
+        iyz="1.65066398670069E-09"
+
+        izz="1.01724089658795E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_pre_elbow.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_pre_elbow.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_shoulder_twirl"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.000249999999984485 -0.071 -0.00149999999999298"
+
+      rpy="1.57079632679489 0 3.14159265358979" />
+
+    <parent
+
+      link="right_humerus" />
+
+    <child
+
+      link="right_pre_elbow" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="right_elbow">
+
+    <inertial>
+
+      <origin
+
+        xyz="1.28375179410389E-11 -0.01685290940512 -0.000526043408046642"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0263941052952769" />
+
+      <inertia
+
+        ixx="8.22620109053937E-06"
+
+        ixy="5.5843300637688E-16"
+
+        ixz="-2.7145135118328E-14"
+
+        iyy="7.16435420734095E-06"
+
+        iyz="1.25983301010983E-07"
+
+        izz="3.03743170696228E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_elbow.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_elbow.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_elbow_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0 -0.015"
+
+      rpy="1.57079632679489 0 1.57079632679489" />
+
+    <parent
+
+      link="right_pre_elbow" />
+
+    <child
+
+      link="right_elbow" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="right_hand">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.0169938599768454 -0.00563594039750882 1.54182117916438E-05"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.09431095759233" />
+
+      <inertia
+
+        ixx="1.8734055996203E-05"
+
+        ixy="-2.47535212049273E-07"
+
+        ixz="-1.21215045800667E-14"
+
+        iyy="1.19876997106438E-05"
+
+        iyz="1.57603047317209E-08"
+
+        izz="1.88259850175947E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_hand.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_hand.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_hand_twirl"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 -0.048 0"
+
+      rpy="1.5707963267949 0 1.5707963267949" />
+
+    <parent
+
+      link="right_elbow" />
+
+    <child
+
+      link="right_hand" />
+
+    <axis
+
+      xyz="-1 0 0" />
+
+  </joint>
+
+  <link
+
+    name="right_finger">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.00345648756024929 -0.0180431175792823 -0.0191307335311278"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.00911108863683015" />
+
+      <inertia
+
+        ixx="3.24180727523416E-06"
+
+        ixy="3.75342179795892E-07"
+
+        ixz="-6.11359602340152E-09"
+
+        iyy="1.46983505174294E-06"
+
+        iyz="3.29650218936322E-08"
+
+        izz="2.25791280979684E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_finger.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_finger.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_finger_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.0295000000000001 0.0113001797402872 0.0192500000000014"
+
+      rpy="0 0 -1.61749555498595" />
+
+    <parent
+
+      link="right_hand" />
+
+    <child
+
+      link="right_finger" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="pelvis">
+
+    <inertial>
+
+      <origin
+
+        xyz="1.40435664846283E-08 0.0104513929633443 -0.00251213839731507"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.197712399995098" />
+
+      <inertia
+
+        ixx="5.38102007372109E-05"
+
+        ixy="-3.32004042447692E-11"
+
+        ixz="-7.96894886773734E-11"
+
+        iyy="2.6801447149139E-05"
+
+        iyz="-9.42843539710837E-07"
+
+        izz="5.20334209077826E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/pelvis.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/pelvis.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="pelvis_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0.0119499999999996 -0.131000000000001"
+
+      rpy="0 0 0" />
+
+    <parent
+
+      link="trunk_1" />
+
+    <child
+
+      link="pelvis" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="u_block_2">
+
+    <inertial>
+
+      <origin
+
+        xyz="9.85322934354826E-16 0.000222124945046554 0.00645153621726086"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0119217053151813" />
+
+      <inertia
+
+        ixx="6.15184467855973E-06"
+
+        ixy="-1.25957999295351E-19"
+
+        ixz="1.3262088391518E-20"
+
+        iyy="2.68582937937327E-06"
+
+        iyz="6.02064475174989E-08"
+
+        izz="4.33546445767003E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_block_2.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_block_2.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_hip_yaw"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.021 0 -0.0405"
+
+      rpy="0 0 3.1416" />
+
+    <parent
+
+      link="pelvis" />
+
+    <child
+
+      link="u_block_2" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_hip_joint">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.00473942684203732 -0.013195435168564 0.000223016913043151"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0549919434936329" />
+
+      <inertia
+
+        ixx="1.30696526153425E-05"
+
+        ixy="3.53985787332633E-08"
+
+        ixz="-2.645471661761E-11"
+
+        iyy="6.32105610210363E-06"
+
+        iyz="-1.58727638024289E-08"
+
+        izz="1.10846805707891E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_hip_joint.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_hip_joint.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_hip_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0.000500000000000028 -0.0149999999999987"
+
+      rpy="1.5707963267949 1.5707963267949 0" />
+
+    <parent
+
+      link="u_block_2" />
+
+    <child
+
+      link="left_hip_joint" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="left_knee_link">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.0347347348139205 -0.00418009072334563 -0.000249999949346193"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.104480937840143" />
+
+      <inertia
+
+        ixx="1.24466674947374E-05"
+
+        ixy="4.04203628481723E-07"
+
+        ixz="2.89790458598777E-08"
+
+        iyy="2.37916370291091E-05"
+
+        iyz="-8.46829652045769E-09"
+
+        izz="2.32092919819631E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_knee.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_knee.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_hip_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.0355 -0.0225 0.00025"
+
+      rpy="1.5708 0 -3.1416" />
+
+    <parent
+
+      link="left_hip_joint" />
+
+    <child
+
+      link="left_knee_link" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="tibia_2">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.0127606071192313 0.040080139734472 0.000145774650487852"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.067778527586917" />
+
+      <inertia
+
+        ixx="1.30318512065637E-05"
+
+        ixy="3.39473922534954E-06"
+
+        ixz="-9.44616372424153E-09"
+
+        iyy="1.09442995897016E-05"
+
+        iyz="-2.44794118596932E-08"
+
+        izz="1.21439109712014E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/tibia_2.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/tibia_2.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_knee"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.0650801874462834 -0.00265551824022087 0"
+
+      rpy="-3.14159265358979 0 -1.21807923767551" />
+
+    <parent
+
+      link="left_knee_link" />
+
+    <child
+
+      link="tibia_2" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_ankle_joint">
+
+    <inertial>
+
+      <origin
+
+        xyz="2.69832734496895E-05 0.0307604063004211 0.00950305262645398"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0549919443536752" />
+
+      <inertia
+
+        ixx="1.10846805710888E-05"
+
+        ixy="8.92850974843502E-11"
+
+        ixz="-1.5614722436031E-08"
+
+        iyy="1.30696526874767E-05"
+
+        iyz="-3.53985783713071E-08"
+
+        izz="6.32105617383499E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_ankle_joint.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_ankle_joint.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_ankle_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.024534 0.05896 0"
+
+      rpy="0 0 0.35272" />
+
+    <parent
+
+      link="tibia_2" />
+
+    <child
+
+      link="left_ankle_joint" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="left_foot">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.012307197373586 -0.0217032943606653 -0.000809364805023378"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0465225994000907" />
+
+      <inertia
+
+        ixx="5.30468225212706E-05"
+
+        ixy="-1.12408830943379E-07"
+
+        ixz="2.28259676775524E-10"
+
+        iyy="3.58756931779256E-05"
+
+        iyz="5.05048060886674E-10"
+
+        izz="1.76515895178126E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_foot.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/left_foot.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="left_ankle_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.00055 0.0355 0"
+
+      rpy="-1.5708 0 -1.5708" />
+
+    <parent
+
+      link="left_ankle_joint" />
+
+    <child
+
+      link="left_foot" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="u_block_1">
+
+    <inertial>
+
+      <origin
+
+        xyz="1.2490009027033E-15 0.000222124945045666 0.00645153621726077"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0119217053151813" />
+
+      <inertia
+
+        ixx="6.15184467855973E-06"
+
+        ixy="-1.26724401699364E-19"
+
+        ixz="1.37985825777153E-20"
+
+        iyy="2.68582937937327E-06"
+
+        iyz="6.02064475174926E-08"
+
+        izz="4.33546445767003E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_block_1.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/u_block_1.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_hip_yaw"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.021 0 -0.0405"
+
+      rpy="0 0 3.1416" />
+
+    <parent
+
+      link="pelvis" />
+
+    <child
+
+      link="u_block_1" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="right_hip_joint">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.00473959369955573 -0.0130991261799329 0.000224267661365095"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0549919443536751" />
+
+      <inertia
+
+        ixx="1.30696526874767E-05"
+
+        ixy="3.86687539872233E-08"
+
+        ixz="-2.64497621413053E-11"
+
+        iyy="6.32105617383497E-06"
+
+        iyz="-1.56147224360269E-08"
+
+        izz="1.10846805710888E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_hip_joint.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_hip_joint.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_hip_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0 0.000499999999999947 -0.0150000000000013"
+
+      rpy="1.5707963267949 -1.5707963267949 0" />
+
+    <parent
+
+      link="u_block_1" />
+
+    <child
+
+      link="right_hip_joint" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="right_knee_link">
+
+    <inertial>
+
+      <origin
+
+        xyz="0.00418009079486925 -0.0347347349927054 -0.000250000046850989"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.104480937839157" />
+
+      <inertia
+
+        ixx="2.37916370273473E-05"
+
+        ixy="-4.04203628670354E-07"
+
+        ixz="8.46829125233902E-09"
+
+        iyy="1.2446667496421E-05"
+
+        iyz="2.8979053283351E-08"
+
+        izz="2.32092919819621E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_knee.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.556862745098039 0.556862745098039 0.556862745098039 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_knee.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_hip_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.0355 -0.0235 0.00025"
+
+      rpy="1.5708 1.5708 0" />
+
+    <parent
+
+      link="right_hip_joint" />
+
+    <child
+
+      link="right_knee_link" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="tibia_1">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.012742658633531 0.040089046929897 -0.000160875841038813"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0677785271611077" />
+
+      <inertia
+
+        ixx="1.30392251391265E-05"
+
+        ixy="3.38913967772404E-06"
+
+        ixz="-9.46588823995119E-09"
+
+        iyy="1.09369255855437E-05"
+
+        iyz="-2.44891935571644E-08"
+
+        izz="1.2143910971053E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/tibia_1.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/tibia_1.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_knee"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.00265551823642486 -0.0650801874464379 0"
+
+      rpy="-3.14159265358979 0 0.352717089119385" />
+
+    <parent
+
+      link="right_knee_link" />
+
+    <child
+
+      link="tibia_1" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="right_ankle_joint">
+
+    <inertial>
+
+      <origin
+
+        xyz="-2.69831794660266E-05 0.0307604061885636 -0.0095993614215939"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0549919439208966" />
+
+      <inertia
+
+        ixx="1.1084680570938E-05"
+
+        ixy="-8.92910471539242E-11"
+
+        ixz="-1.56147248922403E-08"
+
+        iyy="1.30696526520439E-05"
+
+        iyz="-3.86998838708703E-08"
+
+        izz="6.32105613711472E-06" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_ankle_joint.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_ankle_joint.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_ankle_pitch"
+
+    type="continuous">
+
+    <origin
+
+      xyz="-0.024534 0.05896 0"
+
+      rpy="0 0 0.35272" />
+
+    <parent
+
+      link="tibia_1" />
+
+    <child
+
+      link="right_ankle_joint" />
+
+    <axis
+
+      xyz="0 0 -1" />
+
+  </joint>
+
+  <link
+
+    name="right_foot">
+
+    <inertial>
+
+      <origin
+
+        xyz="-0.0123071976650411 -0.021703294195408 -0.000809364805647588"
+
+        rpy="0 0 0" />
+
+      <mass
+
+        value="0.0465225994000906" />
+
+      <inertia
+
+        ixx="5.30468225182517E-05"
+
+        ixy="-1.12409061513478E-07"
+
+        ixz="2.28259683480059E-10"
+
+        iyy="3.58756931809444E-05"
+
+        iyz="5.0504805789663E-10"
+
+        izz="1.76515895178125E-05" />
+
+    </inertial>
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_foot.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.592156862745098 0.619607843137255 0.650980392156863 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/right_foot.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="right_ankle_roll"
+
+    type="continuous">
+
+    <origin
+
+      xyz="0.00025 0.0355 0"
+
+      rpy="1.5708 0 -1.5708" />
+
+    <parent
+
+      link="right_ankle_joint" />
+
+    <child
+
+      link="right_foot" />
+
+    <axis
+
+      xyz="0 0 1" />
+
+  </joint>
+
+  <link
+
+    name="trunk">
+
+    <visual>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/trunk.STL" />
+
+      </geometry>
+
+      <material
+
+        name="">
+
+        <color
+
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+
+      </material>
+
+    </visual>
+
+    <collision>
+
+      <origin
+
+        xyz="0 0 0"
+
+        rpy="0 0 0" />
+
+      <geometry>
+
+        <mesh
+
+          filename="package://robokit-atom_description/meshes/trunk.STL" />
+
+      </geometry>
+
+    </collision>
+
+  </link>
+
+  <joint
+
+    name="trunk_frame"
+
+    type="fixed">
+
+    <origin
+
+      xyz="0 -0.022 -0.091"
+
+      rpy="0 0 0" />
+
+    <parent
+
+      link="trunk" />
+
+    <child
+
+      link="trunk_1" />
+
+    <axis
+
+      xyz="0 0 0" />
+
+  </joint>
+
+</robot>

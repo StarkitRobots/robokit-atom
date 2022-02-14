@@ -1,0 +1,9 @@
+<launch>
+        <param name="robot_description" command="cat $(find send_message)/robokit-atom.urdf" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+                <param name="robot_description" command="cat $(find send_message)/robokit-atom.urdf" />
+                <param name="frame_prefix" value="jopa" />
+                <param name="publish_frequency" value="1" />
+        </node>
+        <node name="state_publisher" pkg="send_message" type="state_publisher" />
+</launch>
