@@ -1,0 +1,8 @@
+<launch>
+        <param name="robot_description" command="cat $(find send_message)/robokit-atom.urdf" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+                <param name="robot_description" command="cat $(find send_message)/robokit-atom.urdf" />
+        </node>
+        <node name="marker_pub" pkg="send_message" type="marker_pub" />
+        <node name="state_publisher" pkg="send_message" type="state_publisher" />
+</launch>
