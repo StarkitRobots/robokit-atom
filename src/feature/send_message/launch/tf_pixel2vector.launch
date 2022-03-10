@@ -1,0 +1,6 @@
+<launch>
+        <node name="pixel_publisher" pkg="send_message" type="pixel_publisher" />
+        <node name="tf_pixel2vector" pkg="send_message" type="tf_pixel2vector" />
+        <node name="marker_pub" pkg="send_message" type="marker_pub" />
+        
+</launch>          
