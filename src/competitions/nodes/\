@@ -96,7 +96,7 @@ class Sprint:
             rospy.loginfo("go right")
             rospy.loginfo(f"my pan: {self.my_pan}, {self.my_tilt}")
         elif(self.my_pan < - critical_degree):
-            self.walk_service (True, self.forward_step, 0 ,  0.4) #0.004
+            self.walk_service (True, self.forward_step, 0 ,  0.2) #0.004
             # rospy.loginfo("go left")
             rospy.loginfo(f"my pan: {self.my_pan}, {self.my_tilt}")
         else:

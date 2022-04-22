@@ -292,6 +292,8 @@ class ArcheryFSM:
         point_norm_vec = get_norm_vector(position)
         angle_diff = angle_b2v(current_vec, point_norm_vec)
         angle_diff = angle_diff if angle_diff > 0 else angle_diff + 2 * math.pi
+        if(self.traj_coords[-1][0] > self.circle_x):
+            angle_diff += 2 * math.pi #bad thing, change in future
  
         angular_speed = 2 * math.pi / self.period
 

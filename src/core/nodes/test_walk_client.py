@@ -47,46 +47,46 @@ def imu_client():
 #     return x1 - x2 - diff
 
 if __name__ == "__main__":
-    num = 10
-    stepLength = 36
-    sideLength = 0
-    rotation = 0.2
+    #num = 10
+    stepLength = -48
+    #sideLength = 0
+    #rotation = 0
 
 
-    to_rotate_deg = 30
+    #to_rotate_deg = 30
 
-    imu_start = imu_client().x
-    imu_end = imu_start - to_rotate_deg
-    imu_end %= 360
+    #imu_start = imu_client().x
+    #imu_end = imu_start - to_rotate_deg
+    #imu_end %= 360
     while True:
-        walk_client(True, 48, 0,0 )
+        walk_client(True, 48, 0, 0 )
         time.sleep(5)
-    while True:
-        imu = imu_client()
-        print("imu: ", imu.x)
-        print("imu end: ", imu_end)
-        if np.abs(imu.x - imu_end) < 3:
-            break
+    #while True:
+    #    imu = imu_client()
+    #    print("imu: ", imu.x)
+    #    print("imu end: ", imu_end)
+    #    if np.abs(imu.x - imu_end) < 3:
+    #        break
 
 
-        if imu.x - imu_end > 0:
-            print("Positive")
-            walk_client(True, 0, 0, rotation)
-        else:
-            print("Negative")
-            walk_client(True, 0, 0, -rotation)
+    #    if imu.x - imu_end > 0:
+    #        print("Positive")
+    #        walk_client(True, 0, 0, rotation)
+    #    else:
+    #        print("Negative")
+    #        walk_client(True, 0, 0, -rotation)
 
-    walk_client(False, 0, 0, 0)
+    # walk_client(False, 0, 0, 0)
    # while(True):
     # walk_client(True, stepLength, sideLength, rotation)
     # time.sleep(5)
     # walk_client(False, 0, 0, 0)
-
-    # walk_client(True, 0, 0, 0.2)
-    # time.sleep(5)
-    # walk_client(False, 0, 0, 0.0)
-
-    # motion_client('test_head')
+    step = 16
+    walk_client(True, step, 0, 0.0)
+    time.sleep(12)
+    walk_client(False, step, 0, 0.0)
+    time.sleep(1)
+    motion_client('jump')
 
     #servos_client(["head_yaw"], [0.5])
     #time.sleep(0.5)

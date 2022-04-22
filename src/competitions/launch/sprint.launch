@@ -11,7 +11,7 @@
        <param name="pixel_format" value="yuyv" />
        <param name="camera_frame_id" value="usb_cam" />
        <param name="io_method" value="mmap"/>
-       <param name="framerate" value="3"/>
+       <param name="framerate" value="15"/>
        <param name="camera_info_url" value="file:///$(find core)/config/ost.yaml"/>
      </node>
      <!-- namespace for camera input -->
