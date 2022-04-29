@@ -219,7 +219,7 @@ class ArcheryFSM:
 
         self.pelvis_rot = 0
         self.pelvis_rot_mistake = 0.1
-        self.pelvis_rot_const = 1.35
+        self.pelvis_rot_const = 1.4
         self.pointed_to_target = False
 
         self.number_of_frames = 100
@@ -231,6 +231,7 @@ class ArcheryFSM:
         self.circle_error = 0
 
         self.l_ind = 0
+
         self.time_delay = 1.1
         self.time_accuracy = 0.1
 
@@ -292,7 +293,9 @@ class ArcheryFSM:
         point_norm_vec = get_norm_vector(position)
         angle_diff = angle_b2v(current_vec, point_norm_vec)
         angle_diff = angle_diff if angle_diff > 0 else angle_diff + 2 * math.pi
- 
+        if(self.traj_coords[-1][0] > self.circle_x):
+            angle_diff = 2 * math.pi - angle_diff
+
         angular_speed = 2 * math.pi / self.period
 
         predicted_time = angle_diff / angular_speed
@@ -322,6 +325,7 @@ class ArcheryFSM:
                 print(self.pelvis_rot)
 
                 self.pointed_to_target = True
+
                 self.move_pelvis()
                 self.traj_coords.clear()
 
