@@ -1,10 +1,10 @@
 {
-    "competition": "basketball",
-    "object": "ball",
-    "node_name": "ball",
-    "pub_topic_name": "ball",
+    "competition": "archery",
+    "object": "target",
+    "node_name": "target",
+    "pub_topic_name": "target",
     "processors": {
-        "name": "ball_detector",
+        "name": "target_detector",
         "filters": [
             {
                 "name": "Colorspace_transform",
@@ -16,14 +16,14 @@
                 "name": "Inrange",
                 "show": 1,
                 "low_th": [
-                    7,
-                    75,
-                    224
+                    23,
+                    78,
+                    106
                 ],
                 "high_th": [
-                    39,
-                    226,
-                    255
+                    52,
+                    174,
+                    239
                 ]
             },
             {

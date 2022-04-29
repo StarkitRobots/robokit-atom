@@ -93,8 +93,8 @@ class Motion:
         self.ACTIVEJOINTS = ['Leg_right_10','Leg_right_9','Leg_right_8','Leg_right_7','Leg_right_6','Leg_right_5','hand_right_4',
             'hand_right_3','hand_right_2','hand_right_1','Tors1','Leg_left_10','Leg_left_9','Leg_left_8',
             'Leg_left_7','Leg_left_6','Leg_left_5','hand_left_4','hand_left_3','hand_left_2','hand_left_1','head0','head12']
-        
-        
+
+
         #uart = UART("/dev/tty0", 1250000, timeout = 1000, parity = serial.PARITY_ODD)
 
         self.kondo = Rcb4BaseLib()
@@ -105,7 +105,7 @@ class Motion:
             time.sleep(1)
         #self.kondo.open(uart)
         #self.kondo.motionPlay(25)
-        
+
 
 
     #-------------------------------------------------------------------------------------------------------------------------------
@@ -227,9 +227,9 @@ class Motion:
                 if (j == 0):
                     a=self.kondo.setServoPos (servoDatas, 10)
                     time.sleep(0.250)
-                else:    
+                else:
                     a=self.kondo.setServoPos (servoDatas, self.frames_per_cycle)
-                
+
                 if comp == "OpenMV":
                     time1 = self.pyb.elapsed_millis(start1)
                     self.pyb.delay(self.frame_delay - time1)
@@ -237,13 +237,14 @@ class Motion:
                     time1 = time.perf_counter() - start1
                     time.sleep(time1)
 
-    def walk_Cycle(self, stepLength,sideLength, rotation,cycle, number_Of_Cycles):
+    def walk_Cycle(self, stepLength, sideLength, rotation, head_tilt = 0, cycle = 4, number_Of_Cycles = 100):
         # if not self.falling_Test() == 0:
         #     if self.falling_Flag == 3: print('STOP!')
         #     else: print('FALLING!!!', self.falling_Flag)
         #     return[]
         #self.stepLength = stepLength
         #self.sideLength = sideLength
+        body_tilt = head_tilt # Warning add difference betwen body and head tilt
         self.stepLength = stepLength + self.motion_shift_correction_x
         self.sideLength = sideLength - self.motion_shift_correction_y
         self.rotation = math.degrees(rotation+self.rotation_shift)
@@ -260,7 +261,7 @@ class Motion:
         # correction of body tilt forward
         #self.xr, self.xl = 0.01, 0.01 # ['BODY_TILT_AT_WALK']
          # correction of body tilt forward
-        self.xr, self.xl = self.config['BODY_TILT_AT_WALK'], self.config['BODY_TILT_AT_WALK']   #
+        self.xr, self.xl = self.config['BODY_TILT_AT_WALK'] + body_tilt, self.config['BODY_TILT_AT_WALK'] + body_tilt   #
         # correction of sole skew depending on side angle of body when step pushes land
         self.yr, self.yl = - self.config['SOLE_LANDING_SKEW'], self.config['SOLE_LANDING_SKEW']
         for iii in range(0,frameNumberPerCycle,framestep):
@@ -274,7 +275,7 @@ class Motion:
                 self.ytl = S + self.d10 + self.sideLength/2
                 self.ztl = -self.gaitHeight
                 self.ztr = -self.gaitHeight
-                if cycle ==0: continue
+                if cycle == 0: continue
                 else: dx0 = dx0_typical
                 self.xtl = xtl0 - dx0 - dx0 * iii/framestep
                 self.xtr = xtr0 - dx0 - dx0 * iii/framestep
@@ -361,7 +362,7 @@ class Motion:
                 if comp == "OpenMV":
                     time1 = self.pyb.elapsed_millis(start1)
                     self.pyb.delay(self.frame_delay - time1)
-                else: 
+                else:
                     time1 = time.perf_counter() - start1
                     time.sleep(time1)
         # returning xr, xl, yr, yl to initial value
@@ -398,7 +399,7 @@ class Motion:
                 if comp == "OpenMV":
                     time1 = self.pyb.elapsed_millis(start1)
                     self.pyb.delay(self.frame_delay - time1)
-                else: 
+                else:
                     time1 = time.perf_counter() - start1
                     time.sleep(time1)
 
@@ -497,7 +498,7 @@ class Motion:
                 if comp == "OpenMV":
                     time1 = self.pyb.elapsed_millis(start1)
                     self.pyb.delay(self.frame_delay - time1)
-                else: 
+                else:
                     time1 = time.perf_counter() - start1
                     time.sleep(time1)
         # returning xr, xl, yr, yl to initial value

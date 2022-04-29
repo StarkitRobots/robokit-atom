@@ -2,9 +2,9 @@
 
 <launch>
     <include file="$(find core)/launch/core.launch"/>
-    
+    <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
     <node pkg="core" name="ball" type="vision_node.py" output="screen"> 
-        <param name="vision_config" type="string" value="$(find core)/config/ball_config.json" />
+        <param name="vision_config" type="string" value="$(find core)/config/basketball/ball_config.json" />
     </node>
 
 </launch>

@@ -34,6 +34,20 @@ To launch motion node:
 rosrun core walk_motion_node.py
 ```
 
+## SSH
+
+Network: Starkit
+```bash
+ssh atom@10.0.0.25
+```
+
+or
+
+Network: humanoid
+```bash
+ssh kondo@192.168.99.1
+```
+
 ## ROS debug
 
 1. On PC
