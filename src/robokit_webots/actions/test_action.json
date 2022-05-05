@@ -1,0 +1,14 @@
+{
+"header":
+    {
+    "joints": ["head_yaw", "left_shoulder_pitch", "right_shoulder_pitch"]
+    },
+
+"keypoints":
+    [
+    {"frames":0, "values":[1, 1, 1]},
+    {"frames":75, "values":[0, 0, 0]},
+    {"frames":15, "values":[-1, -1, -1]},
+    {"frames":10, "values":[1, 1, 1]}
+    ]
+}
