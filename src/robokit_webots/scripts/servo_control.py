@@ -10,7 +10,7 @@ from webots_ros.srv   import set_float
 from robokit_webots.msg import servo_command
 
 
-ROBOT_NAME = "beep_beep"
+ROBOT_NAME = "robokit"
 SERVO_CONTROL_TOPIC = "servo_control"
 #robot_name = rospy.wait_for_message('/model_name', String).data
 

@@ -5,7 +5,7 @@
   <include file="$(find webots_ros)/launch/webots.launch">
     <arg name="mode" value="realtime"/>
     <arg name="no_gui" value="$(arg no_gui)"/>
-    <arg name="world" value="/home/tndrd/workspaces/kondo/world/empty.wbt"/>
+    <arg name="world" value="/home/tndrd/workspaces/robokit-atom/src/robokit_mv_description/webots/worlds/robocup_training.wbt"/>
   </include>
 
   <arg name="auto_close" default="false" doc="Startup mode"/>

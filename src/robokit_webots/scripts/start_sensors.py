@@ -5,8 +5,8 @@ from webots_ros.srv  import set_int
 from webots_ros.msg  import Float64Stamped
 from sensor_msgs.msg import JointState
 
-ROBOT_NAME = "beep_beep"
-SAMPLING_PERIOD = 32
+ROBOT_NAME = "robokit"
+SAMPLING_PERIOD = 25
 JOINT_STATE_TOPIC = "/joint_state"
 
 
