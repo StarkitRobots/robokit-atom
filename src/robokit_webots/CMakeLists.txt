@@ -9,6 +9,11 @@ add_message_files(
   servo_command.msg
 )
 
+add_service_files(
+  FILES
+  SetSource.srv
+)
+
 generate_messages(
   DEPENDENCIES
   std_msgs
@@ -42,5 +47,8 @@ catkin_install_python(PROGRAMS scripts/example_servo_publisher.py
 catkin_install_python(PROGRAMS scripts/start_sensors.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-catkin_install_python(PROGRAMS scripts/executor.py
+catkin_install_python(PROGRAMS scripts/animation_server.py
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+catkin_install_python(PROGRAMS scripts/manager.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

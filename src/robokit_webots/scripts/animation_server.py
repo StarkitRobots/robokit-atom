@@ -6,6 +6,7 @@ from robokit_webots.msg import servo_command
 
 ACTION_PATH = os.path.dirname(__file__) + "/../actions/"
 SAMPLING_PERIOD = 32
+ANIMATION_JOINT_GOAL_TOPIC = "animation_joint_goals"
 
 ## Maybe we should use path instead of action name
 def load_action(action_name):
@@ -27,6 +28,7 @@ def execute_action(servo_pub, action):
 
     msg = servo_command()
     msg.names = joints
+    msg.source = "animation_server"
 
     rate = rospy.Rate(1000 / SAMPLING_PERIOD)
 
@@ -64,5 +66,5 @@ def execute_action(servo_pub, action):
 if __name__ == "__main__":
     rospy.init_node('executor', anonymous=False)
     test_action = load_action("test_action.json")
-    pub = rospy.Publisher('servo_control', servo_command, queue_size=10, latch=True)
+    pub = rospy.Publisher(ANIMATION_JOINT_GOAL_TOPIC, servo_command, queue_size=10, latch=True)
     execute_action(pub, test_action)

@@ -56,7 +56,7 @@ def joint_state_publisher(psensor_list):
     joints = list(map(psensor2joint, psensor_list))
 
     subscribers = [mf.Subscriber(psensor + "/value", Float64Stamped) for psensor in psensor_list]
-    js_publisher = rospy.Publisher(JOINT_STATE_TOPIC, JointState, queue_size = 10)
+    js_publisher = rospy.Publisher(JOINT_STATE_TOPIC, JointState, queue_size=10)
 
     ## Needs to be tweaked
     queue_size = 10
