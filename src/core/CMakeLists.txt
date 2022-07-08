@@ -10,6 +10,7 @@ project(core)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
+  webots_ros
   message_generation
 )
 
@@ -47,11 +48,11 @@ catkin_python_setup()
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+add_message_files(
+   FILES
+   servo_command.msg
 #   Message2.msg
-# )
+ )
 
 ## Generate services in the 'srv' folder
 add_service_files(
@@ -173,7 +174,10 @@ catkin_install_python(PROGRAMS
   nodes/arduino_node.py
   nodes/test_arduino_client.py
   nodes/sprint_walk_motion_node.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  nodes/servo_control.py
+  nodes/yaml_to_ros.py
+  nodes/walk_motion_node_dev.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ## Mark executables for installation
