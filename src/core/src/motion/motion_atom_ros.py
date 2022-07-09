@@ -17,7 +17,7 @@ comp = "Atom"
 class Motion:
     def __init__(self, config):
         # ros_webots implementation
-        rospy.init_node('walk_publisher', anonymous=True)
+        # rospy.init_node('walk_publisher', anonymous=True)
 
         self.pub = rospy.Publisher('servo_control', servo_command, queue_size=10)
 

@@ -9,7 +9,7 @@
     <arg name="world" value="$(find core)/webots/worlds/robocup_training.wbt"/>
   </include>
 
-  <node pkg="core" name="camera_info_publisher" type="yaml_to_ros.py" args="$(find core)/config/camera_info.yaml"> </node>
+  <node pkg="core" name="camera_info_publisher" type="yaml_to_ros.py" args="$(find core)/config/camera_info_webots.yaml"> </node>
   <node pkg="core" name="core" type="walk_motion_node_dev.py" output="screen"> </node>
   <node pkg="core" name="servo_control" type="servo_control.py" output="screen"> </node>
 
