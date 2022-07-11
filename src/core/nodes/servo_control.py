@@ -7,7 +7,7 @@ import rospy
 import rosservice
 
 from webots_ros.srv   import set_float
-from core_webots.msg import servo_command
+from core.msg import servo_command
 from std_msgs.msg import String
 
 
@@ -100,11 +100,11 @@ if __name__ == "__main__":
     robot_servo_dict, robot_servo_set = register_servo_dict()
     def servo_command_callback(msg):
         """Recieves servo commands and executes them"""
-        # print("Recieved: ", msg.names, msg.values)
+        print("Recieved: ", msg.names, msg.values)
         start = time()
         # print(robot_servo_dict)
         send_positions(robot_servo_dict, msg.names, msg.values)
-        #print(f"Processed in {(time() - start) * 1000} ms\n")
+        print(f"Processed in {(time() - start) * 1000} ms\n")
         # rate.sleep()
     rospy.Subscriber(SERVO_CONTROL_TOPIC, servo_command, servo_command_callback)
     print("Listening to commands...")

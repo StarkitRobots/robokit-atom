@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <launch>
+    <param name="/use_sim_time" value="true" />
     <!-- start Webots -->
     <arg name="no_gui" default="false," doc="Start Webots with minimal GUI"/>
     <include file="$(find webots_ros)/launch/webots.launch">
         <arg name="mode" value="realtime"/>
         <arg name="no_gui" value="$(arg no_gui)"/>
-        <arg name="world" value="$(find core/webots/worlds/basketball_playground.wbt"/>
+        <arg name="world" value="$(find core)/webots/worlds/basketball_playground.wbt"/>
     </include>
 
     <node pkg="core" name="walk_motion" type="walk_motion_node_dev.py" output="screen"> </node>
     <node pkg="core" name="model" type="model_service.py" output="screen"> </node>
+
+    <node pkg="core" name="servo_control" type="servo_control.py" output="screen"> </node>
 
     <node pkg="competitions" name="basketball" type="basketball_node.py" output="screen"/>
     <node pkg="core" name="ball" type="vision_node_dev.py" output="screen"> 

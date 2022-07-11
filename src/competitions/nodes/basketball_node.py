@@ -10,12 +10,13 @@ from core.srv import ModelService, ServoService, WalkService, ImuService
 
 
 class Basketball:
-    step_length = 36
+    step_length = 32
     const_step_length = 12.5
-    side_length = 10
+    side_length = 20
     const_side_length = 1
     angle = 0.05
     const_angle = 1
+
 
     dead_distance = 0.1
 
@@ -39,17 +40,17 @@ class Basketball:
 
     def update_ball(self, msg):
         self.ball = (msg.x, msg.y)
-        self.last_seen_ball = time.time()
+        self.last_seen_ball = rospy.get_time()
         if self.ball != (None, None):
-            #rospy.loginfo(f"Got the ball: {self.ball[0]}, {self.ball[1]}")
+            rospy.loginfo(f"Got the ball: {self.ball[0]}, {self.ball[1]}")
             self.ball_self = self.get_ball_distance()
             self.distance_to_ball = sqrt(self.ball_self[0] ** 2 + self.ball_self[1] ** 2)
-            rospy.loginfo(f"Got the ball in self coords: {self.ball_self[0]}, {self.ball_self[1]}")
+            #rospy.loginfo(f"Got the ball in self coords: {self.ball_self[0]}, {self.ball_self[1]}")
 
 
     def update_basketcase(self, msg):
         self.basketcase = (msg.x, msg.y)
-        self.last_seen_basketcase = time.time()
+        self.last_seen_basketcase = rospy.get_time()
         if self.basketcase != (None, None):
             #rospy.loginfo(f"Got the basketcase: {self.basketcase[0]}, {self.basketcase[1]}")
             self.basketcase_self = self.get_basketcase_distance()
@@ -85,23 +86,19 @@ class Basketball:
         rospy.loginfo("Start finding ball")
         radians = Basketball.radians_search(5)
         l = []
-        for elem in radians:
-            self.move_head(elem[0], elem[1])
-            time.sleep(2)
-            if self.ball != (None, None):
-                l.append(self.ball_self)
-                print(self.ball_self)
+        while len(l) < 2:
+            for elem in radians:
+                self.move_head(elem[0], elem[1])
+                rospy.sleep(3)
+                if self.ball != (None, None):
+                    self.ball_self = self.get_ball_distance()
+                    print(self.ball_self)
+                    l.append(self.ball_self)
             # choose the mediana of all balls in coordinates of robor and look at dispersy, check massive of all finded bolls
-            else:
-                print("GOVNO")
-        for elem in radians:
-            self.move_head(elem[0], elem[1])
-            time.sleep(2)
-            if self.ball != (None, None):
-                l.append(self.ball_self)
-                print(self.ball_self)
+                else:
+                    print("GOVNO")
         self.ball_coordinates = tuple(np.median(np.array(l), axis = 0))
-        print(len(l))
+        print("MEDIANA:")
         print(self.ball_coordinates)
         if self.ball_coordinates != (None, None):
             self.flag_ball = True
@@ -148,7 +145,7 @@ class Basketball:
         degree = np.arctan(self.ball_coordinates[1] / self.ball_coordinates[0]) * 180 / np.pi
         rospy.loginfo(str(degree))
         self.rotate(degree)
-        time.sleep(1)
+        rospy.sleep(1)
 
     def turn_to_basketcase(self):
         rospy.loginfo("Start turning to basketcase")
@@ -156,7 +153,7 @@ class Basketball:
         rotation = np.arctan(self.basketcase_coordinates[1] / self.basketcase_coordinates[0])
         time_rotate = (math.fabs(rotation)) * Basketball.const_angle
         self.walk(True, 0, 0, Basketball.angle)
-        time.sleep(time_rotate)
+        rospy.sleep(time_rotate)
         self.walk(False, 0, 0, 0)
 
 
@@ -168,6 +165,7 @@ class Basketball:
         try: 
             walk_service = rospy.ServiceProxy('walk_service', WalkService)
             walk_service(walk_enabled, step_length, side_length, angle)
+            print("Atom is going")
         except rospy.ServiceException as e:
             print("Service call failed:", e)
 
@@ -176,7 +174,16 @@ class Basketball:
         time_walk = percent_distance * (self.distance_to_ball - 0.2) * self.const_step_length
         print(self.distance_to_ball, time_walk)
         self.walk(True, Basketball.step_length, 0, 0)
-        time.sleep(time_walk)
+        rospy.sleep(time_walk)
+        # self.ball_coordinates
+        self.walk(False, 0, 0, 0)
+        rospy.sleep(1)
+
+    def go_to_ball_try(self):
+        rospy.loginfo("Start going to ball")
+        time_walk = 100
+        self.walk(True, 30, 0, 0)
+        rospy.sleep(time_walk)
         # self.ball_coordinates
         self.walk(False, 0, 0, 0)
         time.sleep(1)
@@ -185,7 +192,7 @@ class Basketball:
         rospy.loginfo("Start going to basketcase")
         time_walk = 3 * percent_distance
         self.walk(True, Basketball.step_length, 0, 0)
-        time.sleep(time_walk)
+        rospy.sleep(time_walk)
         self.walk(False, 0, 0, 0)
 
     def thinking_take(self):
@@ -202,13 +209,13 @@ class Basketball:
             # take the ball
             # 3 steps right
             self.walk(True, 0, Basketball.side_length, 0)
-            time.sleep(time_walk)
+            rospy.sleep(time_walk)
             self.walk(False, 0, 0, 0)
         elif self.distance >= 0:
             # take the ball
             # 3 steps left
             self.walk(True, 0, Basketball.side_length, 0)
-            time.sleep(time_walk)
+            rospy.sleep(time_walk)
             self.walk(False, 0, 0, 0)
 
     def imu_client(self):
@@ -243,11 +250,16 @@ class Basketball:
                 break
             
             if imu.x - imu_end > 0:
-                print("Positive")
-                self.walk_client(True, 0, 0, rotation)
-            else:
+                if math.fabs(imu.x - imu_end) <= 180:
+                    self.walk_client(True, 0, 0, rotation)
+                else:
+                    self.walk_client(True, 0, 0, -rotation)
+            if  imu.x - imu_end <= 0:
                 print("Negative")
-                self.walk_client(True, 0, 0, -rotation)
+                if math.fabs(imu.x - imu_end) <= 180:
+                    self.walk_client(True, 0, 0, -rotation)
+                else:
+                    self.walk_client(True, 0, 0, rotation)
             
         self.walk_client(False, 0, 0, 0)
 
@@ -255,32 +267,29 @@ class Basketball:
 if __name__ == "__main__":
     rospy.init_node("basketball")
     basketball = Basketball()
-    ball_sub = rospy.Subscriber('ball', Point, basketball.update_ball)
-    basketcase_sub = rospy.Subscriber('basketcase', Point, basketball.update_basketcase)
-    while True:
-        if basketball.basketcase_self != (None, None):
-            print(basketball.ball_self)
-        else:
-            print("NO BALL")
+    # ball_sub = rospy.Subscriber('ball', Point, basketball.update_ball)
+    # basketcase_sub = rospy.Subscriber('basketcase', Point, basketball.update_basketcase)
+
+    basketball.go_to_ball_try()
     # Finding ball and putting it to self.ball_coordinates for future approach.
-    #while not (basketball.flag_ball):
-    #    basketball.finding_ball()
-    #print(basketball.flag_ball)
+    # while not (basketball.flag_ball):
+    #     basketball.finding_ball()
+    # print(basketball.flag_ball)
     
     #Approaching to the ball on 0.8 of distance
-    #basketball.flag_ball = False
-    #basketball.turn_to_ball()
-    #basketball.go_to_ball(0.8)
+    # basketball.flag_ball = False
+    # basketball.turn_to_ball()
+    # basketball.go_to_ball(0.8)
     
     # Correct the ball position
-    #while not (basketball.flag_ball): 
-    #    basketball.finding_ball()
-    #print(basketball.flag_ball)
+    # while not (basketball.flag_ball): 
+    #     basketball.finding_ball()
+    # print(basketball.flag_ball)
     
     # Finally approach a ball
-    #basketball.flag_ball = False
-    #basketball.turn_to_ball()
-    #basketball.go_to_ball(1)
+    # basketball.flag_ball = False
+    # basketball.turn_to_ball()
+    # basketball.go_to_ball(1)
     
     # Searching for basket
     # while not (basketball.flag_basketcase):
