@@ -7,7 +7,7 @@ from serial import Serial as UART
 
 from .compute_Alpha_v3 import Alpha
 # from .kondo_controller import Rcb4BaseLib
-from core_webots.msg import servo_command
+from core.msg import servo_command
 import rospy
 
 
