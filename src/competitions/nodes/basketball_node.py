@@ -181,8 +181,8 @@ class Basketball:
 
     def go_to_ball_try(self):
         rospy.loginfo("Start going to ball")
-        time_walk = 100
-        self.walk(True, 30, 0, 0)
+        time_walk = 15
+        self.walk(True, 10, 0, 0)
         rospy.sleep(time_walk)
         # self.ball_coordinates
         self.walk(False, 0, 0, 0)
